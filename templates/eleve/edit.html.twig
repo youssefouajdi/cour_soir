@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur index{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h4 style="margin-top:100px;"></h4>
+    <h1>Edit Eleve</h1>
+
+    {{ include('eleve/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('eleve_index') }}">back to list</a>
+   {{ include('eleve/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+{% endblock %}

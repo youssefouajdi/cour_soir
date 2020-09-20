@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Affectation{% endblock %}
+
+{% block body %}
+    <h1>Create new Affectation</h1>
+
+    {{ include('affectation/_form.html.twig') }}
+
+    <a href="{{ path('affectation_index') }}">back to list</a>
+{% endblock %}

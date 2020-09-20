@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur index{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h4 style="margin-top:100px;"></h4>
+    <h1>Matiere</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdMatiere</th>
+                <td>{{ matiere.idMatiere }}</td>
+            </tr>
+            <tr>
+                <th>NomMatiere</th>
+                <td>{{ matiere.nomMatiere }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ matiere.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ matiere.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('matiere_index') }}">back to list</a>
+
+    <a href="{{ path('matiere_edit', {'idMatiere': matiere.idMatiere}) }}">edit</a>
+
+    {{ include('matiere/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur index{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h4 style="margin-top:100px;"></h4>
+    <h1>Eleve index</h1>
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>IdEleve</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Transport</th>
+                <th>DtInscription</th>
+                <th>Email</th>
+                <th>Tel</th>
+                <th>Type</th>
+                <th>Niveau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for eleve in eleves %}
+            <tr>
+                <td>{{ eleve.idEleve }}</td>
+                <td>{{ eleve.nom }}</td>
+                <td>{{ eleve.prenom }}</td>
+                <td>{{ eleve.transport ? 'Yes' : 'No' }}</td>
+                <td>{{ eleve.dtInscription ? eleve.dtInscription|date('Y-m-d') : '' }}</td>
+                <td>{{ eleve.email }}</td>
+                <td>{{ eleve.tel }}</td>
+                <td>{{ eleve.type }}</td>
+                <td>{{ eleve.niveau }}</td>
+                <td>
+                    <a href="{{ path('eleve_show', {'idEleve': eleve.idEleve}) }}">show</a>
+                    <a href="{{ path('eleve_edit', {'idEleve': eleve.idEleve}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('eleve_new') }}">Create new</a>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+{% endblock %}

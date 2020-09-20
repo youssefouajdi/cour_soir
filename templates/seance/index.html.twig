@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance index{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <h1 style="margin-top:300px;">Seance index</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdSeance</th>
+                <th>Jour</th>
+                <th>HDebut</th>
+                <th>HFin</th>
+                <th>Salle</th>
+                <th>Effectuer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for seance in seances %}
+            <tr>
+                <td>{{ seance.idSeance }}</td>
+                <td>{{ seance.jour ? seance.jour|date('Y-m-d') : '' }}</td>
+                <td>{{ seance.hDebut ? seance.hDebut|date('H:i:s') : '' }}</td>
+                <td>{{ seance.hFin ? seance.hFin|date('H:i:s') : '' }}</td>
+                <td>{{ seance.salle }}</td>
+                <td>{{ seance.effectuer ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('seance_show', {'idSeance': seance.idSeance}) }}">show</a>
+                    <a href="{{ path('seance_edit', {'idSeance': seance.idSeance}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('seance_new') }}">Create new</a>
+    <a href="{{ path('seance_calendar') }}">Consultez le calendrier des seances </a>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+{% endblock %}

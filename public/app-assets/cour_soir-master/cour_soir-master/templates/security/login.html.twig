@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance{% endblock %}
+
+{% block body %}
+    <h1>log in</h1>
+    <form novalidate method="POST">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{  app.session.get(constant('App\\Controller\\SecurityController::LAST_EMAIL'))}}"required autofocus>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required >
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
+        <input type="submit" value="Sign in">
+        <div>
+            <label for="_remembder_me">
+                <input type="checkbox" name="_remember_me">
+                Gardez ma session ouverte
+            </label>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+{% endblock %}

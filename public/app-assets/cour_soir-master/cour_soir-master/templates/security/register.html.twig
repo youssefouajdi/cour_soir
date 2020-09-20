@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance{% endblock %}
+
+{% block body %}
+    <h1>register</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_widget(registrationForm) }}
+            <input type="submit" value="Register" class="btn btn-primary" formnovalidate>
+        {{ form_end(registrationForm) }}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affectation index{% endblock %}
+
+{% block body %}
+    <h1>Affectation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>Paye</th>
+                <th>Reste</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for affectation in affectations %}
+            <tr>
+                <td>{{ affectation.id }}</td>
+                <td>{{ affectation.jour ? affectation.jour|date('Y-m-d') : '' }}</td>
+                <td>{{ affectation.paye }}</td>
+                <td>{{ affectation.reste }}</td>
+                <td>
+                    <a href="{{ path('affectation_show', {'id': affectation.id}) }}">show</a>
+                    <a href="{{ path('affectation_edit', {'id': affectation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

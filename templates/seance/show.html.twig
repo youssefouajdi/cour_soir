@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance{% endblock %}
+
+{% block body %}
+    <h1>Seance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdSeance</th>
+                <td>{{ seance.idSeance }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ seance.jour ? seance.jour|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HDebut</th>
+                <td>{{ seance.hDebut ? seance.hDebut|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HFin</th>
+                <td>{{ seance.hFin ? seance.hFin|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Salle</th>
+                <td>{{ seance.salle }}</td>
+            </tr>
+            <tr>
+                <th>Effectuer</th>
+                <td>{{ seance.effectuer ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('seance_index') }}">back to list</a>
+
+    <a href="{{ path('seance_edit', {'idSeance': seance.idSeance}) }}">edit</a>
+
+    {{ include('seance/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+{% endblock %}

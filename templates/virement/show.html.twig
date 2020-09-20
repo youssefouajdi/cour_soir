@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Virement{% endblock %}
+
+{% block body %}
+    <h1>Virement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdVirement</th>
+                <td>{{ virement.idVirement }}</td>
+            </tr>
+            <tr>
+                <th>DtVirement</th>
+                <td>{{ virement.dtVirement ? virement.dtVirement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TotalSalaire</th>
+                <td>{{ virement.totalSalaire }}</td>
+            </tr>
+            <tr>
+                <th>Reste</th>
+                <td>{{ virement.reste }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('virement_index') }}">back to list</a>
+
+    <a href="{{ path('virement_edit', {'idVirement': virement.idVirement}) }}">edit</a>
+
+    {{ include('virement/_delete_form.html.twig') }}
+{% endblock %}

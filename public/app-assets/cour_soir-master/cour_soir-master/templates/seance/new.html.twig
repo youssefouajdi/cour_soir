@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Seance{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1 style="margin-top:100px;">Create new Seance</h1>
+
+    {{ include('seance/_form.html.twig') }}
+
+    <a href="{{ path('seance_index') }}">back to list</a>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+{% endblock %}

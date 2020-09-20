@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Virement index{% endblock %}
+
+{% block body %}
+    <h1>Virement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdVirement</th>
+                <th>DtVirement</th>
+                <th>TotalSalaire</th>
+                <th>Reste</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for virement in virements %}
+            <tr>
+                <td>{{ virement.idVirement }}</td>
+                <td>{{ virement.dtVirement ? virement.dtVirement|date('Y-m-d') : '' }}</td>
+                <td>{{ virement.totalSalaire }}</td>
+                <td>{{ virement.reste }}</td>
+                <td>
+                    <a href="{{ path('virement_show', {'idVirement': virement.idVirement}) }}">show</a>
+                    <a href="{{ path('virement_edit', {'idVirement': virement.idVirement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('virement_new') }}">Create new</a>
+{% endblock %}

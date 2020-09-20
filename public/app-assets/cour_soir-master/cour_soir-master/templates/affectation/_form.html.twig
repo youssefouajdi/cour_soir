@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var $sport;
+    $sport = $('#affectation_id_matiere');
+    $('#affectation_id_professeur').hide();
+    $sport.change(function() {
+        $('#affectation_id_professeur').show();
+        var $form = $(this).closest('form');
+        var data = {id_matiere : $sport.val()};
+        // data[$sport.attr('name')] = $sport.val();
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'GET',
+            data : data,
+            success: function(html) {
+                $('#affectation_id_professeur').replaceWith(
+                    $(html).find('#affectation_id_professeur')
+                );
+            }
+        });
+    });
+</script>
