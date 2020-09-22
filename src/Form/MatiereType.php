@@ -19,10 +19,21 @@ class MatiereType extends AbstractType
                     'eleve' => [
                         '1 AC' => '1 AC',
                         '2 AC' => '2 AC',
+                        '3 AC' => '3 AC',
+                        '1 BAC S'=>'1 BAC S',
+                        '1 BAC SM'=>'1 BAC SM',
+                        '2 BAC PC'=>'2 BAC PC',
+                        '2 BAC SVT'=>'2 BAC SVT',
+                        '2 BAC SM'=>'2 BAC SM'
                     ],
                     'etudiant' => [
-                        'Backordered' => 'stock_backordered',
-                        'Discontinued' => 'stock_discontinued',
+                        'S1' => 'S1',
+                        'S2' => 'S2',
+                        'S3' => 'S3',
+                        'S4' => 'S4',
+                        'S5' => 'S5',
+                        'S6' => 'S6'
+
                     ]
                 ]])
             ->add('prix')

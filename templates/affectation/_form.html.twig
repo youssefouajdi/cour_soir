@@ -1,14 +1,60 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_label(form.paye) }}
+    {{ form_widget(form.paye) }}
+    {{ form_label(form.reste) }}
+    {{ form_widget(form.reste) }}
+    {{ form_label(form.jour) }}
+    {{ form_widget(form.jour) }}
+    <fieldset > 
+                <legend>Affecter Matiere:</legend> 
+    {{ form_label(form.id_matiere, 'Matiere') }}
+    {{ form_widget(form.id_matiere) }}
+    {{ form_label(form.id_professeur,'Professeur') }}
+    {{ form_widget(form.id_professeur) }}
+    </fieldset> 
+    <br>
+    <a id="btn1"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+    
+    <fieldset id="add1"> 
+                <legend>Affecter Matiere:</legend> 
+    {{ form_label(form.id_matiere2, 'Matiere') }}
+    {{ form_widget(form.id_matiere2) }}
+    {{ form_label(form.id_professeur2,'Professeur') }}
+    {{ form_widget(form.id_professeur2) }}
+    <br>
+    <a  id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+    </fieldset> 
+    
+    
+    
+    <fieldset id="add2"> 
+                <legend>Affecter Matiere:</legend> 
+    {{ form_label(form.id_matiere3, 'Matiere') }}
+    {{ form_widget(form.id_matiere3) }}
+    {{ form_label(form.id_professeur3,'Professeur') }}
+    {{ form_widget(form.id_professeur3) }}
+    </fieldset>
+    <br><br>
+    {{ form_widget(form.save, { 'label': 'Click me' }) }}
 {{ form_end(form) }}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var $sport;
     $sport = $('#affectation_id_matiere');
-    $('#affectation_id_professeur').hide();
+    
+    $('#add1').hide();
+     $('#add2').hide();
+     $( "#btn1" ).click(function() {
+   $('#add1').show();
+   $('#btn1').hide();
+});
+$( "#btn2" ).click(function() {
+   $('#add2').show();
+   $('#btn2').hide();
+});
     $sport.change(function() {
         $('#affectation_id_professeur').show();
+        
         var $form = $(this).closest('form');
         var data = {id_matiere : $sport.val()};
         $.ajax({
@@ -19,6 +65,40 @@
                 $('#affectation_id_professeur').replaceWith(
                     $(html).find('#affectation_id_professeur')
                 );
+                  var $sport1;
+                    $sport1 = $('#affectation_id_matiere2');
+                    $sport1.change(function() {
+                    
+                    var $form = $(this).closest('form');
+                    var data = {id_matiere2 : $sport1.val()};
+                    $.ajax({
+                        url : $form.attr('action'),
+                        type: 'GET',
+                        data : data,
+                        success: function(html) {
+                            $('#affectation_id_professeur2').replaceWith(
+                                $(html).find('#affectation_id_professeur2')
+                            );
+                            var $sport2;
+                                $sport2 = $('#affectation_id_matiere3');
+                                $sport2.change(function() {
+                                
+                                var $form = $(this).closest('form');
+                                var data = {id_matiere3 : $sport2.val()};
+                                $.ajax({
+                                    url : $form.attr('action'),
+                                    type: 'GET',
+                                    data : data,
+                                    success: function(html) {
+                                        $('#affectation_id_professeur3').replaceWith(
+                                            $(html).find('#affectation_id_professeur3')
+                                        );
+                                    }
+                                });
+                            });
+                        }
+                    });
+                });
             }
         });
     });

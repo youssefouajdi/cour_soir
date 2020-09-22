@@ -45,17 +45,56 @@ class AffectationController extends AbstractController
         if ($request->isMethod('POST')) {
             $idMatier = $request->request->get('id_matiere', null);
         }
+        $idMatier2 = $request->query->get('id_matiere2', null);
+        if ($request->isMethod('POST')) {
+            $idMatier2 = $request->request->get('id_matiere2', null);
+        }
+        $idMatier3 = $request->query->get('id_matiere3', null);
+        if ($request->isMethod('POST')) {
+            $idMatier3 = $request->request->get('id_matiere3', null);
+        }
         $affectation = new Affectation();
         $affectation->setIdEleve($ideleve);
         $affectation->setJour(new DateTime());
         
         $form = $this->createForm(AffectationType::class, $affectation, [
-            'id_matiere' => $idMatier
+            'id_matiere' => $idMatier,
+            'id_matiere2' => $idMatier2,
+            'id_matiere3'=>$idMatier3
         ]);
             
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($affectation);
+            $tableaumatiere=[];
+            if($form['id_matiere']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere']->getData()); 
+            }
+            if($form['id_matiere2']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere2']->getData()) ;
+            }
+            if($form['id_matiere3']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere3']->getData()) ;
+            }
+            $tableauprofesseur=[];
+            if($form['id_professeur']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur']->getData()); 
+            }
+            if($form['id_professeur2']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur2']->getData()) ;
+            }
+            if($form['id_professeur3']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur3']->getData()) ;
+            }
+            $k=count($tableaumatiere);
+            for($i=0;$i<$k;$i++){
+                $group = new Affectation();
+                $group->setJour($form['jour']->getData());
+               // $group->setIdProfesseur($tableauprofesseur[$i]);
+                $group->setIdMatiere($tableaumatiere[$i]);
+                $group->setPaye($form['paye']->getData());
+                $group->setReste($form['reste']->getData());
+                $entityManager->persist($group);
+            }
             $entityManager->flush();
             return $this->redirectToRoute('affectation_index');
         }

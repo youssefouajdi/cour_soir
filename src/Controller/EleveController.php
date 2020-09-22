@@ -39,7 +39,15 @@ class EleveController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($form->getData()->getNiveau()==="stock_yes" || $form->getData()->getNiveau()==="stock_no"){
+           
+            if($form->getData()->getNiveau()=== '1 AC' ||
+            $form->getData()->getNiveau()=== '2 AC' ||
+            $form->getData()->getNiveau()=== '3 AC' ||
+            $form->getData()->getNiveau()=== '1 BAC S' ||
+            $form->getData()->getNiveau()=== '1 BAC SM' ||
+            $form->getData()->getNiveau()=== '2 BAC PC' ||
+            $form->getData()->getNiveau()=== '2 BAC SVT' ||
+            $form->getData()->getNiveau()=== '2 BAC SM' ){
                 $eleve->setType("eleve");
             }else{
                 $eleve->setType("etudiant");

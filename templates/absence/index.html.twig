@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AbsenceController!{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h4 style="margin-top:100px;">Rechercher :</h4>
+
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+
+
+<style>
+    .add { margin-left: 80px;
+    }
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>{#Hello ! ✅#}</h1>
+</div>
+         {% if absence|length == 0 %}
+
+       
+          <tr>
+                <td colspan="5">no records found</td>
+          </tr>
+  {% else %}
+        
+   <table class="table">
+        <thead>
+            {#<tr>
+               <th>Date_inscription</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Matiere</th>
+                <th>Niveau</th>
+                <th>Prof</th>
+            </tr>
+            #}
+            <tr>
+               <th>Date_inscription</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Matiere</th>
+                <th>Niveau</th>
+                <th>Prof</th>
+            </tr>
+           
+        </thead>
+     {#   
+       <tbody>
+        {% for eleve in eleves %}
+            <tr>
+              
+                <td>{{ eleve.nom }}</td>
+                <td>{{ eleve.prenom }}</td>
+                <td>{{ eleve.niveau }}</td>
+                <td></td>
+                <td>
+                    <label for="id">Présent</label>
+                <input name="{{ loop.index }}" type="checkbox" for="id">
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+                        <td></td>
+            <td><label for="id">Tout est Présent</label>
+                <input name="All" type="checkbox" for="id"><br><br>
+                {{ form(form2)}}
+                
+</td>
+            </tr>
+        </tbody>#}
+    </table>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    <!-- BEGIN: Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/ui/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/tether.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/shepherd.min.js') }}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+   <!-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script>-->
+    <!-- END: Page JS-->
+{% endblock %}

@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New Absence{% endblock %}
+
+{% block body %}
+    <h1>Ajouter Absence</h1>
+   {{ form_start(form) }}
+      {{ form_widget(form) }}
+	 
+            {{ form_end(form) }}
+
+    
+    
+    <a href="{{ path('absence_index') }}">ack to list</a>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Eleve;
 use App\Entity\Absence;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,6 +19,38 @@ class AbsenceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Absence::class);
     }
+
+/*
+    public function findAllAbs(Absence $search): ?array{
+        $query=$this->findAll();
+        $entityManager = $this->getEntityManager();
+        if( $search->getIdEleve() || $search->getIdSeance()) {
+            if ($search->getIdEleve()) {
+                $query = $entityManager->createQuery(
+                    'SELECT p
+                FROM App\Entity\Eleve p
+                    WHERE p.niveau = :prenomprof')
+                    ->setParameter('prenomprof', $search->getPrenomProf());
+            }
+            if ($search->getNomProf()) {
+                $query = $entityManager->createQuery(
+                    'SELECT p
+                FROM App\Entity\Professeur p
+                    WHERE p.nom = :nomprof')
+                    ->setParameter('nomprof', $search->getNomProf());
+            }
+/*
+            if ($search->getModule()) {
+                $query = $entityManager->createQuery(
+                    'SELECT p
+                FROM App\Entity\Professeur p
+                    WHERE p.idMatiere = :moduleprof')
+                    ->setParameter('moduleprof', $search->getModule());
+            }
+            return $query->getResult();
+        }
+    return $query;
+    }*/
 
     // /**
     //  * @return Absence[] Returns an array of Absence objects

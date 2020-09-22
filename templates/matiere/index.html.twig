@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Matiere index{% endblock %}
+ {% block head %}
+  {{ parent() }}
+            <title>{% block title %}Matiere index{% endblock %}</title>
+        {% endblock %}
 
 {% block body %}
     {{ parent() }}

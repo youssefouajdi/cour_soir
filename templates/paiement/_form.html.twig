@@ -1,0 +1,76 @@
+
+{{ form_start(form) }}
+{{ form_label(form.dtPaiement) }}
+    {{ form_widget(form.dtPaiement) }}
+    {{ form_label(form.mode) }}
+    {{ form_widget(form.mode) }}
+    {{ form_label(form.idEleve) }}
+    {{ form_widget(form.idEleve) }}
+
+    <fieldset> 
+                <legend>Matiere a payé:</legend> 
+    {{ form_label(form.idMatiere, 'Matiere') }}
+    {{ form_widget(form.idMatiere) }}
+    {{ form_label(form.PrixMatiere,'Prix') }}
+    {{ form_widget(form.PrixMatiere) }}
+    {{ form_label(form.PrixPaye,'Paye') }}
+    {{ form_widget(form.PrixPaye) }}
+    </fieldset> 
+    <br>
+    <a id="btn1"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+    
+<fieldset id="add1"> 
+                <legend>Matiere a payé:</legend> 
+    {{ form_label(form.idMatiere1, 'Matiere') }}
+    {{ form_widget(form.idMatiere1) }}
+    {{ form_label(form.PrixMatiere1,'Prix') }}
+    {{ form_widget(form.PrixMatiere1) }}
+    {{ form_label(form.PrixPaye1,'Paye') }}
+    {{ form_widget(form.PrixPaye1) }}
+    <br>
+    <a  id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+    </fieldset> 
+  <fieldset id="add2"> 
+                <legend>Matiere a payé:</legend> 
+    {{ form_label(form.idMatiere2, 'Matiere') }}
+    {{ form_widget(form.idMatiere2) }}
+    {{ form_label(form.PrixMatiere2,'Prix') }}
+    {{ form_widget(form.PrixMatiere2) }}
+    {{ form_label(form.PrixPaye2,'Paye') }}
+    {{ form_widget(form.PrixPaye2) }}
+    </fieldset>
+    <br><br>
+{{ form_label(form.montantTotal, 'Total') }}
+    {{ form_widget(form.montantTotal) }}
+    {{ form_label(form.motantRest, 'Reste total a payée') }}
+    {{ form_widget(form.motantRest) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var $sport;
+    $sport = $('#paiement_idMatiere');
+    $val=$('#paiement_montantTotal');
+    $val1= $('#paiement_motantRest');
+     $('#paiement_motantRest').prop("disabled", true);
+    $('#add1').hide();
+     $('#add2').hide();
+     $( "#btn1" ).click(function() {
+   $('#add1').show();
+   $('#btn1').hide();
+});
+$( "#btn2" ).click(function() {
+   $('#add2').show();
+   $('#btn2').hide();
+});
+$("input:disabled").val(0);
+    $sport.change(function() {
+        $("#paiement_montantTotal").val(250);
+        $val.change(function() {
+       $("input:disabled").val(250-$val.val());
+        });
+        
+    });
+</script>
+

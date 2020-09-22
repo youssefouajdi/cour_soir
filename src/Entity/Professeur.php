@@ -51,6 +51,11 @@ class Professeur
      */
     private $idMatiere;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $id_user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Professeur
     public function __toString()
     {
         return $this->getNom().' '.$this->getPrenom();
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?User $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
     }
 
 

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement index{% endblock %}
+
+{% block body %}
+    <h1>Paiement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPaiement</th>
+                <th>DtPaiement</th>
+                <th>Mode</th>
+                <th>MontantTotal</th>
+                <th>MotantRest</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paiement in paiements %}
+            <tr>
+                <td>{{ paiement.idPaiement }}</td>
+                <td>{{ paiement.dtPaiement ? paiement.dtPaiement|date('Y-m-d') : '' }}</td>
+                <td>{{ paiement.mode }}</td>
+                <td>{{ paiement.montantTotal }}</td>
+                <td>{{ paiement.motantRest }}</td>
+                <td>
+                    <a href="{{ path('paiement_show', {'idPaiement': paiement.idPaiement}) }}">show</a>
+                    <a href="{{ path('paiement_edit', {'idPaiement': paiement.idPaiement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('paiement_new') }}">Create new</a>
+{% endblock %}
