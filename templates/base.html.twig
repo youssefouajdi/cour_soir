@@ -11,7 +11,7 @@
             <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
             <meta name="author" content="PIXINVENT">
             <title>Dashboard analytics - Vuexy - Bootstrap HTML admin template</title>
-            <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+            <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
             <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
             <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
@@ -21,7 +21,6 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/tether-theme-arrows.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/tether.min.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/shepherd-theme-default.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}">            
             <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
 
 
@@ -146,7 +145,7 @@
                                         <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ app.user.name }}</span>
                                         <span class="user-status">Available</span></div><span>
                                         <img class="round" 
-                                        src="http://picasaweb.google.com/data/entry/api/user/youssefouajdi1?alt=json" alt="avatar" height="40" width="40"></span>
+                                        src="" alt="avatar" height="40" width="40"></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="feather icon-power"></i> Logout</a>
@@ -185,51 +184,41 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Email">Etudiants</span></a>
                     <ul class="menu-content">
-                        <li><a href="/etudiants/"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                        <li><a href="{{ path('eleve_index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
                         </li>
-                        <li><a href="/etudiants/new"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a href="/etudiants/edit"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                        <li><a href="{{ path('eleve_new') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Nouveau</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-award"></i><span class="menu-title" data-i18n="Chat">Professeurs</span></a>
                     <ul class="menu-content">
-                        <li><a href="/professeur/"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                        <li><a href="{{ path('professeur_index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
                         </li>
-                        <li><a href="/professeur/new"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a href="/professeur/edit"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                        <li><a href="{{ path('professeur_new') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Nouveau</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-clock"></i><span class="menu-title" data-i18n="Todo">Séances</span></a>
                     <ul class="menu-content">
-                        <li><a href="/seances/"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                        <li><a href="{{ path('professeur_index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
                         </li>
-                        <li><a href="/seances/new"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a href="/seances/edit"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                        <li><a href="{{ path('professeur_new') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Nouveau</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-money"></i><span class="menu-title" data-i18n="Calender">Paiements</span></a>
                     <ul class="menu-content">
-                        <li><a href="/paiement/"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                        <li><a href="{{ path('paiement_index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
                         </li>
-                        <li><a href="/paiement/new"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a href="/paiement/edit"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                        <li><a href="{{ path('paiement_new') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Nouveau</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-book"></i><span class="menu-title" data-i18n="Calender">Matieres</span></a>
                     <ul class="menu-content">
-                        <li><a href="/matiere/"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                        <li><a href="{{ path('matiere_index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>
                         </li>
-                        <li><a href="/matiere/new"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a href="/matiere/edit"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                        <li><a href="{{ path('matiere_new') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
                         </li>
                     </ul>
                 </li>

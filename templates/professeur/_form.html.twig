@@ -1,10 +1,27 @@
 {{ form_start(form) }}
-{{ form_label(form.idMatiere, 'Matiere', {'label_attr': {'class': 'select2'}}) }}
-    {{ form_widget(form.idMatiere, { 'attr': {'class': 'select2'} }) }}
-    {{ form_label(form.id_professeur,'Nom du professeur ', {'label_attr': {'class': 'select2'}}) }}
-    {{ form_widget(form.id_professeur, { 'attr': {'class': 'select2'} }) }}
+{{ form_label(form.id_user, 'User', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_user) }}
+{{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.nom) }}
+    {{ form_label(form.prenom, 'Prenom', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.prenom) }}
+    {{ form_label(form.tel, 'Telephone', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.tel) }}
+{{ form_label(form.idMatiere, 'Matiere', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.idMatiere) }}
+    <div id="test1">
+    {{ form_label(form.id_professeur,'Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur) }}
+    </div>
+    {{ form_label(form.id_professeur2,'Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur2) }}
+    <div id="test2">
+    {{ form_label(form.id_professeur3,'Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur3) }}
+    </div>
+    <br>
     <a id="btn1"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
-    <a id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+    <a id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a><br><br>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 {% block javascripts %}
@@ -14,17 +31,17 @@
     var $sport;
     $sport = $('#professeur_idMatiere');
     
-     $('#professeur_id_professeur2').hide();
-      $('#professeur_id_professeur3').hide();
-     $('btn2').hide();
+     $('#test1').hide();
+      $('#test2').hide();
+     $('#btn2').hide();
      $( "#btn1" ).click(function() {
-         $('#professeur_id_professeur2').show();
+         $('#test1').show();
    $('#btn1').hide();
-    $('btn2').show();
+    $('#btn2').show();
 });
 $( "#btn2" ).click(function() {
-    $('#professeur_id_professeur3').show();
-   $('#add2').show();
+    $('#test2').show();
+   $('#test3').show();
    $('#btn2').hide();
 });
     $sport.change(function() {
@@ -84,6 +101,5 @@ $( "#btn2" ).click(function() {
     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
-    <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
 
 {% endblock %}

@@ -93,6 +93,7 @@ class AffectationController extends AbstractController
                // $group->setIdProfesseur($tableauprofesseur[$i]);
                 $group->setIdMatiere($tableaumatiere[$i]);
                 $group->setPaye($form['paye']->getData());
+                $group->setIdEleve($ideleve);
                 $group->setReste($form['reste']->getData());
                 $entityManager->persist($group);
             }
