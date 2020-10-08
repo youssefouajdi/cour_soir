@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Matiere;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use App\Entity\Eleve;
@@ -20,7 +21,10 @@ class PaiementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dtPaiement')
+            ->add('dtPaiement',DateType::class, [
+                'label'=>'Date de Paiement',
+                
+            ])
             ->add('mode',ChoiceType::class,[
                 'choices' => [
                     'cheque' => 'cheque',

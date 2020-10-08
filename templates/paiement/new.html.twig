@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Seance{% endblock %}
+{% block title %}Paiement{% endblock %}
 
 {% block body %}
     {{ parent() }}
@@ -18,7 +18,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Accueil</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">Séances</a>
+                                    <li class="breadcrumb-item"><a href="{{ path('paiement_index') }}">Paiement</a>
                                     </li>
                                     <li class="breadcrumb-item active">Nouveau
                                     </li>
@@ -48,7 +48,7 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-xl-4 col-sm-6 col-12 mb-1">
+                                            <div class="col-xl-4 col-sm-12 col-12 mb-1">
                                                 <fieldset class="form-group">
 
 
@@ -59,6 +59,7 @@
                                             </div>
                                             <div class="col-xl-4 col-sm-6 col-12 mb-1">
                                                 <fieldset class="form-group">
+                                                <a href="{{ path('paiement_index') }}">back to list</a>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -68,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                </section>
                 </section>
                 <!-- Basic Inputs end -->
 
@@ -79,26 +81,12 @@
 
     
 
-   
- </fieldset>
-                                            </div>
-                                            <div class="col-xl-4 col-sm-6 col-12 mb-1">
-                                                <fieldset class="form-group">
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
                 <!-- Basic Inputs end -->
 
 
 
- <a href="{{ path('paiement_index') }}">back to list</a>
+ 
     
     </div>
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Affectation index{% endblock %}
+{% block title %}Paiement{% endblock %}
 {% block body %}
 {{ parent() }}
     <h1>Paiement</h1>
@@ -8,11 +8,11 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>IdPaiement</th>
+                <th>Id Paiement</th>
                 <td>{{ paiement.idPaiement }}</td>
             </tr>
             <tr>
-                <th>DtPaiement</th>
+                <th>Date Paiement</th>
                 <td>{{ paiement.dtPaiement ? paiement.dtPaiement|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
@@ -20,11 +20,11 @@
                 <td>{{ paiement.mode }}</td>
             </tr>
             <tr>
-                <th>MontantTotal</th>
+                <th>Montant Total</th>
                 <td>{{ paiement.montantTotal }}</td>
             </tr>
             <tr>
-                <th>MotantRest</th>
+                <th>Motant Rest</th>
                 <td>{{ paiement.motantRest }}</td>
             </tr>
         </tbody>
