@@ -4,6 +4,7 @@
 
 {% block body %}
     {{ parent() }}
+
 <div class="app-content content">
 <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -12,14 +13,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Modifier une affectation :</h2>
+                            <h2 class="content-header-title float-left mb-0">Créer une Séance :</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Accueil</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">Affectation</a>
+                                    <li class="breadcrumb-item"><a href="#">Séances</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Editer
+                                    <li class="breadcrumb-item active">Nouveau
                                     </li>
                                 </ol>
                             </div>
@@ -50,11 +51,8 @@
                                             <div class="col-xl-4 col-sm-6 col-12 mb-1">
                                                 <fieldset class="form-group">
 
-    {{ include('affectation/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('task/_form.html.twig') }}
 
-    
-
-    
  </fieldset>
                                             </div>
                                             <div class="col-xl-4 col-sm-6 col-12 mb-1">
@@ -76,33 +74,9 @@
 
     
     </div>
-   
-    
- </fieldset>
-                                            </div>
-                                            <div class="col-xl-4 col-sm-6 col-12 mb-1">
-                                                <fieldset class="form-group">
-                                                <a href="{{ path('affectation_index') }}">back to list</a>
-
-    {{ include('affectation/_delete_form.html.twig') }}
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                  
-                            </div>
-                        </div>
-                    </div>
-                    
-                </section>
-                <!-- Basic Inputs end -->
-    </div>
-        
 
 
-
-    
+ <a href="{{ path('task_index') }}">back to list</a>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
@@ -112,4 +86,4 @@
 <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
 {% endblock %}
-
+   

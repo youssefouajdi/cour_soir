@@ -36,44 +36,57 @@
                   </div>
                   <div class="card-content">
                      <div class="card-body card-dashboard">
-                        <button id="addRow" class="btn btn-primary mb-2 waves-effect waves-light"><i class="feather icon-plus"></i>&nbsp;<a href="{{ path('virement_new') }}">Create new</a></button>
+                        <button id="addRow" class="btn btn-primary mb-2 waves-effect waves-light"><i class="feather icon-plus"></i>&nbsp;<a href="{{ path('task_new') }}">Create new</a></button>
                         
                         <div class="table-responsive">
                            <table class="table zero-configuration">
                               <thead>
                                  <tr>
-                <th>IdVirement</th>
-                <th>DtVirement</th>
-                <th>TotalSalaire</th>
-                <th>Reste</th>
+                                 
+ 
+                <th>Id</th>
+                <th>Objet</th>
+                <th>Sujet</th>
+                <th>Date</th>
+                <th>Effectuer</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for virement in virements %}
+        {% for task in tasks %}
             <tr>
-                <td>{{ virement.idVirement }}</td>
-                <td>{{ virement.dtVirement ? virement.dtVirement|date('Y-m-d') : '' }}</td>
-                <td>{{ virement.totalSalaire }}</td>
-                <td>{{ virement.reste }}</td>
+                <td>{{ task.id }}</td>
+                <td>{{ task.Objet }}</td>
+                <td>{{ task.sujet }}</td>
+                <td>{{ task.date ? task.date|date('Y-m-d') : '' }}</td>
+                {% if task.effectuer %}
+                   <td> <div class="chip chip-success">
+                                            <div class="chip-body">
+                                                <div class="chip-text">Effectuer</div>
+                                        </div></div></td>
+                {% else %}
+                   <td> <div class="chip chip-warning">
+                                            <div class="chip-body">
+                                                <div class="chip-text">En attente</div>
+                                        </div></div></td>
+                {% endif %}
                 <td>
-                 <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('virement_show', {'idVirement': virement.idVirement}) }}"><i class="feather icon-search"></i></a>
-                    <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('virement_edit', {'idVirement': virement.idVirement}) }}"><i class="feather icon-edit"></i></a>
-               
+                     <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('task_show', {'id': task.id}) }}"><i class="feather icon-search"></i></a>
+                    <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('task_edit', {'id': task.id}) }}"><i class="feather icon-edit"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
          <tfoot>
                                  <tr>
-                                  <th>IdVirement</th>
-                <th>DtVirement</th>
-                <th>TotalSalaire</th>
-                <th>Reste</th>
+                                   <th>Id</th>
+                <th>Objet</th>
+                <th>Sujet</th>
+                <th>Date</th>
+                <th>Effectuer</th>
                 <th>actions</th>
                                  </tr>
                               </tfoot>
@@ -107,5 +120,3 @@
 <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/datatables/datatable.js') }}"></script>
 {% endblock %}
-
-    

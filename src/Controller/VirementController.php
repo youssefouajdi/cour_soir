@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Virement;
 use App\Form\VirementType;
+use App\Entity\Notification;
 use App\Repository\VirementRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +42,14 @@ class VirementController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($virement);
             $entityManager->flush();
-
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("un virement a ete effectue");
+            $notification->setLu(FALSE);
+            $entityManager1->persist($notification);
+            $notification->setType("new");
+            $entityManager1->flush();
             return $this->redirectToRoute('virement_index');
         }
 
@@ -71,7 +79,13 @@ class VirementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modification d un virement");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('virement_index');
         }
 
@@ -90,6 +104,13 @@ class VirementController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($virement);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d un virement");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('virement_index');

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Professeur;
 use App\Entity\ProfesseurSearch;
+use App\Entity\Notification;
 use App\Form\ProfesseurSearchType;
 use App\Form\ProfesseurType;
 use App\Repository\ProfesseurRepository;
@@ -68,6 +69,14 @@ class ProfesseurController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($professeur);
             $entityManager->flush();
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("un professeur a ete ajoute");
+            $notification->setType("new");
+            $notification->setLu(FALSE);
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('professeur_index');
         }
 
@@ -104,7 +113,13 @@ class ProfesseurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modificationd un professeur");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('professeur_index');
         }
 
@@ -127,6 +142,13 @@ class ProfesseurController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($professeur);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d un professeur");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('professeur_index');

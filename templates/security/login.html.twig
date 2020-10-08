@@ -1,99 +1,156 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
 
-<html lang="en">
 <head>
-<title>{% block title %}Welcome login page !{% endblock %}</title>
-    {% block stylesheets %}
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
+    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png.js') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
-            <link rel="icon" type="image/png" href="{{ asset('login/images/icons/favicon.ico') }}" />
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
+    <!-- END: Vendor CSS-->
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/authentication.css') }}">
+    <!-- END: Page CSS-->
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/animate/animate.css') }}">
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <!-- END: Custom CSS-->
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/css-hamburgers/hamburgers.min.css') }}">
-
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/select2/select2.min.css') }}">
-
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/css/util.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('login/css/main.css') }}">
-    {% endblock %}
 </head>
-<body>
- {% block body %}
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <div class="login100-pic js-tilt" data-tilt>
-                <img src="{{ asset('login/images/img-01.png') }}" alt="IMG">
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
             </div>
-            <form class="login100-form validate-form" novalidate method="POST">
-                <span class="login100-form-title">Connection</span>
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="email" id="email" name="email" value="{{  app.session.get(constant('App\\Controller\\SecurityController::LAST_EMAIL'))}}"required autofocus>
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="password" id="password" name="password" required >
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
-                <div class="container-login100-form-btn">
-                    <input class="login100-form-btn" type="submit" value="Sign in">
-                </div>
-                <div class="text-center p-t-12">
-                    <label class="txt2" for="_remembder_me">
-                        <input class="txt2" type="checkbox" name="_remember_me">
-                        Gardez ma session ouverte
-                    </label>
-                </div>
-                <div class="text-center p-t-136">
-                    <a class="txt2" href="#">
-                        Create your Account
-                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </form>
+            <div class="content-body">
+                <section class="row flexbox-container">
+                    <div class="col-xl-8 col-11 d-flex justify-content-center">
+                        <div class="card bg-authentication rounded-0 mb-0">
+                            <div class="row m-0">
+                                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+                                    <img src="{{ asset('app-assets/images/pages/login.png') }}" alt="branding logo">
+                                </div>
+                                <div class="col-lg-6 col-12 p-0">
+                                    <div class="card rounded-0 mb-0 px-2">
+                                        <div class="card-header pb-1">
+                                            <div class="card-title">
+                                                <h4 class="mb-0">Se Connecter</h4>
+                                            </div>
+                                        </div>
+                                        <p class="px-2">Bienvenue, Merci de saisir vos informations.</p>
+                                        <div class="card-content">
+                                            <div class="card-body pt-1">
+                                    <form novalidate method="POST">
+        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{  app.session.get(constant('App\\Controller\\SecurityController::LAST_EMAIL'))}}" required>
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-user"></i>
+                                                        </div>
+                                                        <label for="email">Email</label>
+                                                    </fieldset>
+                                                    <fieldset class="form-label-group position-relative has-icon-left">
+                                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-lock"></i>
+                                                        </div>
+                                                        <label for="password">Mot de passe</label>
+                                                    </fieldset>
+<input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
+                                                     <div class="form-group d-flex justify-content-between align-items-center">
+                                                        <div class="text-left">
+                                                            <fieldset class="checkbox">
+                                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                    <input type="checkbox" name="_remember_me">
+                                                                    <span class="vs-checkbox">
+                                                                        <span class="vs-checkbox--check">
+                                                                            <i class="vs-icon feather icon-check"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span class="">Se Rappeler</span>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">S'inscrire</a>
+                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Se Connecter</button>
+                                                </form>
+        
+        
+        
+                                                    
+
+                                                    
+                                                   
+                                            </div>
+                                        </div>
+                                        <div class="login-footer">
+                                            {# <div class="divider">
+                                                <div class="divider-text">OR</div>
+                                            </div>
+                                            <div class="footer-btn d-inline">
+                                                <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
+                                                <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
+                                                <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
+                                                <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
+                                            </div> #}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
         </div>
     </div>
-</div>
+    <!-- END: Content-->
 
-<script src="{{ asset('login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 
-<script src="{{ asset('login/vendor/bootstrap/js/popper.js') }}"></script>
-<script src="{{ asset('login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- BEGIN: Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <!-- BEGIN Vendor JS-->
 
-<script src="{{ asset('login/vendor/select2/select2.min.js') }}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <!-- END: Page Vendor JS-->
 
-<script src="{{ asset('login/vendor/tilt/tilt.jquery.min.js') }}"></script>
-<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
+    <!-- BEGIN: Theme JS-->
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+    <!-- END: Theme JS-->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script >
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- BEGIN: Page JS-->
+    <!-- END: Page JS-->
 
-  gtag('config', 'UA-23581568-13');
-</script>
-
-<script src="{{ asset('login/js/main.js') }}" ></script>
-<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" defer=""></script>
-{% endblock %}
 </body>
-</html>
-    
+<!-- END: Body-->
 
+</html>

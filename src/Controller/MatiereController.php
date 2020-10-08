@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Matiere;
 use App\Form\MatiereType;
+use App\Entity\Notification;
 use App\Repository\MatiereRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +46,14 @@ class MatiereController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($matiere);
             $entityManager->flush();
-
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("une nouvelle matiere a ete ajoute");
+            $notification->setLu(FALSE);
+            $entityManager1->persist($notification);
+            $notification->setType("new");
+            $entityManager1->flush();
             return $this->redirectToRoute('matiere_index');
         }
 
@@ -82,7 +90,13 @@ class MatiereController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modification sur une matiere");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('matiere_index');
         }
 
@@ -105,6 +119,13 @@ class MatiereController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($matiere);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d une matiere");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('matiere_index');

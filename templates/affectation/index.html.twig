@@ -1,13 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Affectation index{% endblock %}
-
 {% block body %}
-    <h1>Affectation index</h1>
+{{ parent() }}
+<div class="app-content content">
+   <div class="content-overlay"></div>
+   <div class="header-navbar-shadow"></div>
+   <div class="content-wrapper">
+      <div class="content-header row">
+         <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+               <div class="col-12">
+                  <h2 class="content-header-title float-left mb-0">Liste des affectations :</h2>
+                  <div class="breadcrumb-wrapper col-12">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">affectation</a>
+                        </li>
+                        <li class="breadcrumb-item active">Liste
+                        </li>
+                     </ol>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <section id="basic-datatable">
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h4 class="card-title">Liste des affectations</h4>
+                  </div>
+                  <div class="card-content">
+                     <div class="card-body card-dashboard">
+                        <div class="table-responsive">
+                           <table class="table zero-configuration">
+                              <thead>
+                                 <tr>
 
-    <table class="table">
-        <thead>
-            <tr>
                 <th>Id</th>
                 <th>Jour</th>
                 <th>Paye</th>
@@ -23,16 +55,54 @@
                 <td>{{ affectation.paye }}</td>
                 <td>{{ affectation.reste }}</td>
                 <td>
-                    <a href="{{ path('affectation_show', {'id': affectation.id}) }}">show</a>
-                    <a href="{{ path('affectation_edit', {'id': affectation.id}) }}">edit</a>
+                     <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('affectation_show', {'id': affectation.id}) }}"><i class="feather icon-search"></i></a>
+                    <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('affectation_edit', {'id': affectation.id}) }}"><i class="feather icon-edit"></i></a>
+              
                 </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+       </tr>
+                                 {% endfor %}
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                  <th>Id</th>
+                <th>Jour</th>
+                <th>Paye</th>
+                <th>Reste</th>
+                <th>actions</th>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/datatables/datatable.js') }}"></script>
 {% endblock %}

@@ -50,10 +50,7 @@
                                             <div class="col-xl-4 col-sm-6 col-12 mb-1">
                                                 <fieldset class="form-group">
 
-    {{ include('affectation/_form.html.twig', {'button_label': 'Update'}) }}
-
-    
-
+    {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
     
  </fieldset>
                                             </div>
@@ -82,9 +79,12 @@
                                             </div>
                                             <div class="col-xl-4 col-sm-6 col-12 mb-1">
                                                 <fieldset class="form-group">
-                                                <a href="{{ path('affectation_index') }}">back to list</a>
+                                                 
+   
+    
+    <a href="{{ path('task_index') }}">back to list</a>
 
-    {{ include('affectation/_delete_form.html.twig') }}
+    {{ include('task/_delete_form.html.twig') }}
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -94,15 +94,11 @@
                             </div>
                         </div>
                     </div>
-                    
                 </section>
                 <!-- Basic Inputs end -->
+
     </div>
-        
 
-
-
-    
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
@@ -112,4 +108,6 @@
 <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
 {% endblock %}
+
+
 

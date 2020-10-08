@@ -1,9 +1,14 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_label(form.idMatiere, 'Matiere', {'label_attr': {'class': 'select2'}}) }}
+    {{ form_widget(form.idMatiere, { 'attr': {'class': 'select2'} }) }}
+    {{ form_label(form.id_professeur,'Nom du professeur ', {'label_attr': {'class': 'select2'}}) }}
+    {{ form_widget(form.id_professeur, { 'attr': {'class': 'select2'} }) }}
     <a id="btn1"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
     <a id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+{% block javascripts %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var $sport;
@@ -73,3 +78,12 @@ $( "#btn2" ).click(function() {
         });
     });
 </script>
+
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+ 
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+
+{% endblock %}

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Affectation{% endblock %}
-
+{% block title %}Affectation index{% endblock %}
 {% block body %}
+{{ parent() }}
     <h1>Affectation</h1>
 
     <table class="table">
@@ -32,3 +32,4 @@
 
     {{ include('affectation/_delete_form.html.twig') }}
 {% endblock %}
+

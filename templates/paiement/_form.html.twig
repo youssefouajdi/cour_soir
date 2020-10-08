@@ -51,9 +51,18 @@
 <script>
     var $sport;
     $sport = $('#paiement_idMatiere');
+    $sport1 = $('#paiement_idMatiere1');
+    $sport2 = $('#paiement_idMatiere2');
     $val=$('#paiement_montantTotal');
     $val1= $('#paiement_motantRest');
+    $PrixMatiere=$('#paiement_PrixMatiere');
+    $PrixMatiere1=$('#paiement_PrixMatiere1');
+    $PrixMatiere2=$('#paiement_PrixMatiere2');
+    $Prixpaye=$('#paiement_PrixPaye');
+    $Prixpaye1=$('#paiement_PrixPaye1');
+    $Prixpaye2=$('#paiement_PrixPaye2');
      $('#paiement_motantRest').prop("disabled", true);
+    $('#paiement_montantTotal').prop("disabled", true);
     $('#add1').hide();
      $('#add2').hide();
      $( "#btn1" ).click(function() {
@@ -64,13 +73,62 @@ $( "#btn2" ).click(function() {
    $('#add2').show();
    $('#btn2').hide();
 });
+$Prixpaye.val(0);$Prixpaye1.val(0);$Prixpaye2.val(0);
 $("input:disabled").val(0);
-    $sport.change(function() {
-        $("#paiement_montantTotal").val(250);
-        $val.change(function() {
-       $("input:disabled").val(250-$val.val());
-        });
-        
-    });
+ var $form = $(this).closest('form');
+$sport.change(function(){
+     var data = {id_matiere : $sport.val()};
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'GET',
+            data : data,
+            success: function(html) {
+                $('#paiement_PrixMatiere').replaceWith(
+                    $(html).find('#paiement_PrixMatiere')
+                );
+                 },
+            complete: function(){
+                $("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
+                $("#paiement_motantRest").val(parseInt($val.val())-parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val()));
+        }
+        })
+});
+$sport1.change(function(){
+     var data = {id_matiere2 : $sport1.val()};
+    try {
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'GET',
+            data : data,
+            success: function(html) {
+                $('#paiement_PrixMatiere1').replaceWith(
+                    $(html).find('#paiement_PrixMatiere1')
+                );
+                 if(html.success == true ){  
+                     $("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
+                    $("#paiement_motantRest").val(parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())-parseInt($val.val()));
+                }
+            },
+            })
+    } catch (error) {
+        console.error(error);
+    }
+                 
+});
+$sport2.change(function(){
+     var data = {id_matiere3 : $sport2.val()};
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'GET',
+            data : data,
+            success: function(html) {
+                $('#paiement_PrixMatiere2').replaceWith(
+                    $(html).find('#paiement_PrixMatiere2')
+                );
+             $("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
+             $("#paiement_motantRest").val(parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())-parseInt($val.val()));
+        }
+        })
+});
 </script>
 

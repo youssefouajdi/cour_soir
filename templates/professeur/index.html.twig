@@ -1,55 +1,149 @@
 {% extends 'base.html.twig' %}
 {% block head %}
     {{ parent() }}
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/path/to/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('/app-assets/path/to/bootstrap/js/bootstrap.min.js') }}"></script>
 {% endblock %}
 
 {% block title %}Professeur index{% endblock %}
 
 {% block body %}
     {{ parent() }}
-    <h4 style="margin-top:100px;">Rechercher :</h4>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
-    <h1>Liste des Professeurs </h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Tel</th>
-                <th>Niveau </th>
-                <th>Matiere</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for professeur in professeurs %}
-            <tr>
-                <td>{{ professeur.id }}</td>
-                <td>{{ professeur.nom }}</td>
-                <td>{{ professeur.prenom }}</td>
-                <td>{{ professeur.tel }}</td>
-                <td>{{ professeur.idMatiere|first }}</td>
-                <td>{{ professeur.idMatiere|slice(1, 10) }}</td>
-                <td>
-                    <a href="{{ path('professeur_show', {'id': professeur.id}) }}">show</a>
-                    <a href="{{ path('professeur_edit', {'id': professeur.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="app-content content">
+<div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Liste des Professeurs :</h2>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Accueil</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">Professeurs</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Liste
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="form-group breadcrum-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- Basic Inputs start -->
+                <section id="basic-input">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Rechercher</h4>
+                                </div>
+                                {{ form_start(form) }}
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xl-4 col-sm-6 col-12 mb-1">
+                                                <fieldset class="form-group">
+                                                    {{ form_label(form.module, 'Module', {'label_attr': {'class': 'col-sm-6 '}}) }}
+                                                    {{ form_widget(form.module, {'attr': {'class': 'select2'}}) }}
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-xl-4 col-sm-6 col-12 mb-1">
+                                                <fieldset class="form-group">
+                                                   {{ form_label(form.id_professeur, 'Professeur', {'label_attr': {'class': 'col-sm-6 '}}) }}
+                                                    {{ form_widget(form.id_professeur, {'attr': {'class': 'select2'}}) }}
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                    </div>
+                                </div>
+                                  
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Basic Inputs end -->
 
-    <a href="{{ path('professeur_new') }}">Create new</a>
+
+    
+                    <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Liste des Professeurs</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                     <button id="addRow" class="btn btn-primary mb-2 waves-effect waves-light"><i class="feather icon-plus"></i>&nbsp;<a href="{{ path('professeur_new') }}">Create new</a></button>
+                        
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Nom</th>
+                                                        <th>Prenom</th>
+                                                        <th>Tel</th>
+                                                        <th>Niveau </th>
+                                                        <th>Matiere</th>
+                                                        <th>actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for professeur in professeurs %}
+                                                        <tr>
+                                                            <td>{{ professeur.id }}</td>
+                                                            <td>{{ professeur.nom }}</td>
+                                                            <td>{{ professeur.prenom }}</td>
+                                                            <td>{{ professeur.tel }}</td>
+                                                            <td>{{ professeur.idMatiere|first }}</td>
+                                                            <td>{{ professeur.idMatiere|slice(1, 10) }}</td>
+                                                            <td>
+                                                                <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('professeur_show', {'id': professeur.id}) }}"><i class="feather icon-search"></i></a>
+                                                                <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('professeur_edit', {'id': professeur.id}) }}"><i class="feather icon-edit"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% else %}
+                                                        <tr>
+                                                            <td colspan="5">no records found</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Nom</th>
+                                                        <th>Prenom</th>
+                                                        <th>Tel</th>
+                                                        <th>Niveau </th>
+                                                        <th>Matiere</th>
+                                                        <th>actions</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+    
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -77,9 +171,19 @@
         });
     });
 </script>
-
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/datatables/datatable.js') }}"></script>
 
 {% endblock %}

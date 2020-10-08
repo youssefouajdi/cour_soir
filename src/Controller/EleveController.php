@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Eleve;
 use App\Form\EleveType;
+use App\Entity\Notification;
 use App\Repository\EleveRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +56,14 @@ class EleveController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($eleve);
             $entityManager->flush();
-
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("un nouveau eleve a ete ajouter");
+            $notification->setLu(FALSE);
+            $notification->setType("new");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('eleve_index');
         }
 
@@ -87,7 +95,13 @@ class EleveController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modification sur les informations d un eleve");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('eleve_index');
         }
 
@@ -107,6 +121,13 @@ class EleveController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($eleve);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d un eleve");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('eleve_index');

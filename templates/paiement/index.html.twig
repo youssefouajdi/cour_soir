@@ -1,13 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Paiement index{% endblock %}
-
 {% block body %}
-    <h1>Paiement index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
+{{ parent() }}
+<div class="app-content content">
+   <div class="content-overlay"></div>
+   <div class="header-navbar-shadow"></div>
+   <div class="content-wrapper">
+      <div class="content-header row">
+         <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+               <div class="col-12">
+                  <h2 class="content-header-title float-left mb-0">Liste des paiement :</h2>
+                  <div class="breadcrumb-wrapper col-12">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Paiement</a>
+                        </li>
+                        <li class="breadcrumb-item active">Liste
+                        </li>
+                     </ol>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <section id="basic-datatable">
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h4 class="card-title">Liste des Paiement</h4>
+                  </div>
+                  <div class="card-content">
+                     <div class="card-body card-dashboard">
+                        <button id="addRow" class="btn btn-primary mb-2 waves-effect waves-light"><i class="feather icon-plus"></i>&nbsp;<a href="{{ path('paiement_new') }}">Create new</a></button>
+                        <div class="table-responsive">
+                           <table class="table zero-configuration">
+                              <thead>
+                                 <tr>
                 <th>IdPaiement</th>
                 <th>DtPaiement</th>
                 <th>Mode</th>
@@ -25,17 +57,55 @@
                 <td>{{ paiement.montantTotal }}</td>
                 <td>{{ paiement.motantRest }}</td>
                 <td>
-                    <a href="{{ path('paiement_show', {'idPaiement': paiement.idPaiement}) }}">show</a>
-                    <a href="{{ path('paiement_edit', {'idPaiement': paiement.idPaiement}) }}">edit</a>
-                </td>
+                     <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('paiement_show', {'idPaiement': paiement.idPaiement}) }}"><i class="feather icon-search"></i></a>
+                    <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('paiement_edit', {'idPaiement': paiement.idPaiement}) }}"><i class="feather icon-edit"></i></a>
+               </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('paiement_new') }}">Create new</a>
+       </tr>
+                                 {% endfor %}
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                  <th>Id</th>
+                <th>IdPaiement</th>
+                <th>DtPaiement</th>
+                <th>Mode</th>
+                <th>MontantTotal</th>
+                <th>MotantRest</th>
+                <th>actions</th>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/datatables/datatable.js') }}"></script>
 {% endblock %}

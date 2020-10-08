@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Paiement;
+use App\Entity\PaiementMatiere;
+use App\Entity\Notification;
 use App\Form\PaiementType;
 use App\Repository\PaiementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,16 +32,56 @@ class PaiementController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $idMatier = $request->query->get('id_matiere', null);
+        if ($request->isMethod('POST')) {
+            $idMatier = $request->request->get('id_matiere', null);
+        }
+        $idMatier2 = $request->query->get('id_matiere2', null);
+        if ($request->isMethod('POST')) {
+            $idMatier2 = $request->request->get('id_matiere2', null);
+        }
+        $idMatier3 = $request->query->get('id_matiere3', null);
+        if ($request->isMethod('POST')) {
+            $idMatier3 = $request->request->get('id_matiere3', null);
+        }
         $paiement = new Paiement();
         $paiement->setDtPaiement(new \DateTime('now'));
-        $form = $this->createForm(PaiementType::class, $paiement);
+        $form = $this->createForm(PaiementType::class, $paiement ,[
+            'id_matiere' => $idMatier,
+            'id_matiere2' => $idMatier2,
+            'id_matiere3'=>$idMatier3
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $a=[];
+            if($idMatier!=null){
+                array_push($a,$idMatier);
+            }
+            if($idMatier2!=null){
+                array_push($a,$idMatier2);
+            }
+            if($idMatier3!=null){
+                array_push($a,$idMatier3);
+            }
+            $k=count($a);
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($paiement);
+                $group = new Paiement();
+                $group->setDtPaiement($form['dtPaiement']->getData());
+                $group->setMode($form['mode']->getData());
+                $group->setIdEleve($form['idEleve']->getData());
+                $group->setMontantTotal($form['montantTotal']->getData());
+                $group->setMotantRest($form['motantRest']->getData());
+                $entityManager->persist($group);
             $entityManager->flush();
-
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("un paiement a ete effectue");
+            $notification->setLu(FALSE);
+            $notification->setType("new");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('paiement_index');
         }
 
@@ -69,7 +111,13 @@ class PaiementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modificationd un paiement");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('paiement_index');
         }
 
@@ -88,6 +136,13 @@ class PaiementController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($paiement);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d un paiement");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('paiement_index');

@@ -24,6 +24,9 @@ class ProfesseurSearchType extends AbstractType
             'class'=>Matiere::class,
             'label'=>'Nom de la matiere',
             'placeholder' => '',
+                'row_attr' => [
+                    'class' => 'myclass'
+                ],
             'choice_label'=>function($matiere){
                 return $matiere->getNiveau().' '. $matiere->getNomMatiere();
                 }

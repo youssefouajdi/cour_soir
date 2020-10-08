@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Seance;
 use App\Form\SeanceType;
+use App\Entity\Notification;
 use App\Repository\SeanceRepository;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -94,7 +95,14 @@ class SeanceController extends AbstractController
                 $entityManager->persist($group);
             }
             $entityManager->flush();
-
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setType("new");
+            $notification->setSujet("un ensemble de seances a ete ajoute ");
+            $notification->setLu(FALSE);
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
 
             return $this->redirectToRoute('seance_index');
         }
@@ -130,7 +138,13 @@ class SeanceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modification d une seance");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('seance_index');
         }
 
@@ -152,6 +166,13 @@ class SeanceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($seance);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d une seance");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('seance_index');

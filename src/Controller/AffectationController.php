@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Affectation;
+use App\Entity\Notification;
 use App\Entity\Eleve;
 use App\Form\AffectationType;
 use App\Repository\AffectationRepository;
@@ -96,6 +97,14 @@ class AffectationController extends AbstractController
                 $entityManager->persist($group);
             }
             $entityManager->flush();
+            $notification = new Notification();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("un eleve a ete affecte a une matiere");
+            $notification->setLu(FALSE);
+            $notification->setType("new");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('affectation_index');
         }
 
@@ -132,7 +141,13 @@ class AffectationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("modification sur l affectation d un eleve");
+            $notification->setLu(FALSE);
+            $notification->setType("edit");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
             return $this->redirectToRoute('affectation_index');
         }
 
@@ -155,6 +170,13 @@ class AffectationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($affectation);
             $entityManager->flush();
+            $entityManager1 = $this->getDoctrine()->getManager();
+            $notification->setDate(new \DateTime('now'));
+            $notification->setSujet("suppression d une affectation ");
+            $notification->setLu(FALSE);
+            $notification->setType("delete");
+            $entityManager1->persist($notification);
+            $entityManager1->flush();
         }
 
         return $this->redirectToRoute('affectation_index');
