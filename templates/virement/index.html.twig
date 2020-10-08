@@ -15,9 +15,9 @@
                   <h2 class="content-header-title float-left mb-0">Liste des Taches :</h2>
                   <div class="breadcrumb-wrapper col-12">
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Accueil</a>
+                        <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Tache</a>
+                        <li class="breadcrumb-item"><a href="{{ path('virement_home') }}">Virement</a>
                         </li>
                         <li class="breadcrumb-item active">Liste
                         </li>
@@ -42,9 +42,9 @@
                            <table class="table zero-configuration">
                               <thead>
                                  <tr>
-                <th>IdVirement</th>
-                <th>DtVirement</th>
-                <th>TotalSalaire</th>
+                <th>Id Virement</th>
+                <th>Date Virement</th>
+                <th>Total Salaire</th>
                 <th>Reste</th>
                 <th>actions</th>
             </tr>
@@ -70,9 +70,9 @@
         </tbody>
          <tfoot>
                                  <tr>
-                                  <th>IdVirement</th>
-                <th>DtVirement</th>
-                <th>TotalSalaire</th>
+                                  <th>Id Virement</th>
+                <th>Date Virement</th>
+                <th>Total Salaire</th>
                 <th>Reste</th>
                 <th>actions</th>
                                  </tr>
