@@ -59,12 +59,11 @@ class ProfesseurController extends AbstractController
         if ($request->isMethod('POST')) {
             $idMatier = $request->request->get('id_matiere', null);
         }
-        
         $professeur = new Professeur();
-
-        $form = $this->createForm(ProfesseurType::class, $professeur);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $form = $this->createForm(ProfesseurType::class, $professeur, [
+            'id_matiere' => $idMatier
+        ]);
+        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($professeur);

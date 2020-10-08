@@ -45,52 +45,23 @@ $( "#btn2" ).click(function() {
    $('#btn2').hide();
 });
     $sport.change(function() {
-        $('#affectation_id_professeur').show();
-        
         var $form = $(this).closest('form');
+        
         var data = {id_matiere : $sport.val()};
         $.ajax({
             url : $form.attr('action'),
             type: 'GET',
             data : data,
             success: function(html) {
-                $('#affectation_id_professeur').replaceWith(
-                    $(html).find('#affectation_id_professeur')
+                $('#professeur_id_professeur').replaceWith(
+                    $(html).find('#professeur_id_professeur')
                 );
-                  var $sport1;
-                    $sport1 = $('#professeur_idMatiere');
-                    $sport1.change(function() {
-                    
-                    var $form = $(this).closest('form');
-                    var data = {id_matiere2 : $sport1.val()};
-                    $.ajax({
-                        url : $form.attr('action'),
-                        type: 'GET',
-                        data : data,
-                        success: function(html) {
-                            $('#affectation_id_professeur2').replaceWith(
-                                $(html).find('#affectation_id_professeur2')
-                            );
-                            var $sport2;
-                                $sport2 = $('#professeur_idMatiere');
-                                $sport2.change(function() {
-                                
-                                var $form = $(this).closest('form');
-                                var data = {id_matiere3 : $sport2.val()};
-                                $.ajax({
-                                    url : $form.attr('action'),
-                                    type: 'GET',
-                                    data : data,
-                                    success: function(html) {
-                                        $('#affectation_id_professeur3').replaceWith(
-                                            $(html).find('#affectation_id_professeur3')
-                                        );
-                                    }
-                                });
-                            });
-                        }
-                    });
-                });
+                 $('#professeur_id_professeur2').replaceWith(
+                    $(html).find('#professeur_id_professeur2')
+                );
+                 $('#professeur_id_professeur3').replaceWith(
+                    $(html).find('#professeur_id_professeur3')
+                );
             }
         });
     });

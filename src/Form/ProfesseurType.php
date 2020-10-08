@@ -23,6 +23,7 @@ class ProfesseurType extends AbstractType
             ->add('prenom')
             ->add('tel')
             ->add('idMatiere',ChoiceType::class, [
+                'placeholder'=>"",
                 'choices' => [
                         'Math' => 'Math',
                         'Physique' => 'Physique',
@@ -43,7 +44,7 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.idMatiere = :val')
+                                ->where('p.nomMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label' =>'niveau'
@@ -52,7 +53,7 @@ class ProfesseurType extends AbstractType
                         $form->add('id_professeur',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"",
+                            'placeholder'=>"test",
                             'label'=>'niveau',
                             'required'=>false
                         ]);
@@ -73,7 +74,7 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.idMatiere = :val')
+                                ->where('p.nomMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label' =>'niveau'
@@ -82,7 +83,7 @@ class ProfesseurType extends AbstractType
                         $form->add('id_professeur2',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"",
+                            'placeholder'=>"test",
                             'label'=>'niveau',
                             'required'=>false
                         ]);
@@ -103,7 +104,7 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.idMatiere = :val')
+                                ->where('p.nomMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label' =>'niveau'
