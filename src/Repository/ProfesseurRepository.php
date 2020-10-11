@@ -63,14 +63,16 @@ class ProfesseurRepository extends ServiceEntityRepository
      * @return \Doctrine\ORM\QueryBuilder Returns an array of Professeur objects
      */
 
-    public function findByExampleField($value)
+    public function findByExampleField($value1,$value2)
     {
-        return $this->createQueryBuilder('a')
-            ->select('a.nom')
-            ->andWhere('a.idMatiere = :val')
-            ->setParameter('val', $value)
+        dd( $this->createQueryBuilder('a')
+             ->andWhere('a.nom_matiere LIKE :val')
+            ->andWhere('a.niveau = :val2')
+            ->setParameter('val', $value1)
+            ->setParameter('val2', $value2)
+            ->getQuery()
+            ->execute());
 
-            ;
     }
 
 }

@@ -1,4 +1,9 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_label(form.type, 'Type', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.type) }}
+     <div id="test1">
+    {{ form_label(form.nom_niveau,'nouveau Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.nom_niveau) }}
+    </div>
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -36,6 +36,8 @@ class NiveauController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+                $niveau->setNomNiveau($form['nom_niveau']->getData());
+            $niveau->setType($form['type']->getData());
             $entityManager->persist($niveau);
             $entityManager->flush();
 

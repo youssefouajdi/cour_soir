@@ -109,8 +109,8 @@
                                                             <td>{{ professeur.nom }}</td>
                                                             <td>{{ professeur.prenom }}</td>
                                                             <td>{{ professeur.tel }}</td>
-                                                            <td>{{ professeur.idMatiere|first }}</td>
-                                                            <td>{{ professeur.idMatiere|slice(1, 10) }}</td>
+                                                            <td>{{ professeur.idMatiere|split('.')|first }}</td>
+                                                            <td>{{ professeur.idMatiere|split('.')|last }}</td>
                                                             <td>
                                                                 <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('professeur_show', {'id': professeur.id}) }}"><i class="feather icon-search"></i></a>
                                                                 <a class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" href="{{ path('professeur_edit', {'id': professeur.id}) }}"><i class="feather icon-edit"></i></a>

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Matiere;
+use App\Entity\Niveau;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,33 +17,15 @@ class MatiereType extends AbstractType
     {
         $builder
             ->add('nomMatiere')
-            ->add('niveau',ChoiceType::class, [
-                'placeholder'=>"",
+            ->add('niveau',EntityType::class, [
+                'class'=>Niveau::class,
+                'label'=>'Niveau',
+                'required'=>true,
+                'placeholder'=>'',
                 'mapped'=>false,
-                'choices' => [
-                    'eleve' => [
-                        '1 AC' => '1 AC',
-                        '2 AC' => '2 AC',
-                        '3 AC' => '3 AC',
-                        '1 BAC S'=>'1 BAC S',
-                        '1 BAC SM'=>'1 BAC SM',
-                        '2 BAC PC'=>'2 BAC PC',
-                        '2 BAC SVT'=>'2 BAC SVT',
-                        '2 BAC SM'=>'2 BAC SM'
-                    ],
-                    'etudiant' => [
-                        'S1' => 'S1',
-                        'S2' => 'S2',
-                        'S3' => 'S3',
-                        'S4' => 'S4',
-                        'S5' => 'S5',
-                        'S6' => 'S6'
-
-                    ]
-                ]])
-            ->add('autre_niveau', null, [
-                'required'   => false,
-                'mapped'=>false
+                'choice_label'=>function($matiere){
+                    return $matiere->getNomNiveau();
+                }
             ])
             ->add('prix')
         ;

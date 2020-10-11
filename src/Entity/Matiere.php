@@ -96,7 +96,7 @@ class Matiere
     }
     public function __toString()
     {
-        return $this->getNiveau().' '.$this->getNomMatiere();
+        return $this->getNiveau().' . '.$this->getNomMatiere();
     }
 
     /**

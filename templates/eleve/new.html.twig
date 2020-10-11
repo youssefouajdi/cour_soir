@@ -21,7 +21,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Créer une Eleve :</h2>
+                            <h2 class="content-header-title float-left mb-0">Créer un Eleve :</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a>
@@ -109,79 +109,130 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Form wizard with icon tabs</h4>
+                                    <h4 class="card-title">Inscription et affectation de l eleve a une matiere</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <p>Add <code>.icons-tab-steps</code> class to get desired icons in tab.</p>
-                                        <form action="#" class="icons-tab-steps wizard-circle">
-
-                                            <!-- Step 1 -->
-                                            <h6><i class="step-icon feather icon-home"></i> Step 1</h6>
+                                    {{ form_start(form, { 'attr' : { 'class': 'icons-tab-steps wizard-circle' } }) }}
+                                            <h6><i class="step-icon feather icon-home"></i> Creation</h6>
                                             <fieldset>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="firstName11">First Name </label>
-                                                            <input type="text" class="form-control" id="firstName11">
+                                                              {{ form_label(form.nom, 'Nom') }}
+    {{ form_widget(form.nom) }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            {{ form_label(form.prenom, 'Prenom') }}
+    {{ form_widget(form.prenom) }}
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="lastName11">Last Name</label>
-                                                            <input type="text" class="form-control" id="lastName11">
+                                                         {{ form_label(form.niveau, 'Niveau') }}
+    {{ form_widget(form.niveau) }}
+                                                             </div>
+                                                             <div class="form-group">
+                                                             {{ form_label(form.tel, 'email') }}
+    {{ form_widget(form.email) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                         {{ form_label(form.tel, 'Telaphone') }}
+    {{ form_widget(form.tel) }}
+                                                             </div>
+                                                             <div class="form-group">
+                                                              {{ form_label(form.transport, 'transport') }}
+    {{ form_widget(form.transport) }}
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                            </fieldset>
+                                            <!-- Step 1 -->
+                                            <h6><i class="step-icon feather icon-briefcase"></i>Affectation</h6>
+                                            <fieldset>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="emailAddress11">Email</label>
-                                                            <input type="email" class="form-control" id="emailAddress11">
+                                                            {{ form_label(form.paye) }}
+    {{ form_widget(form.paye) }}
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="location11">City</label>
-                                                            <select class="custom-select form-control" id="location11" name="location">
-                                                                <option value="new-york">New York</option>
-                                                                <option value="chicago">Chicago</option>
-                                                                <option value="san-francisco">San Francisco</option>
-                                                                <option value="boston">Boston</option>
-                                                            </select>
+                                                            {{ form_label(form.reste) }}
+    {{ form_widget(form.reste) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="row" id="add1">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            
+   {{ form_label(form.id_matiere, 'Matiere') }}
+    {{ form_widget(form.id_matiere) }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                           
+    {{ form_label(form.id_professeur,'Professeur', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            <a id="btn1"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>                   
+    
+ 
+    
+                                                <div class="row" id="add2">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            
+  {{ form_label(form.id_matiere2, 'Matiere') }}
+    {{ form_widget(form.id_matiere2) }}
+    
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                           
+   {{ form_label(form.id_professeur2,'Professeur', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur2) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a  id="btn2"><i class="fa fa-plus-circle fa_custom fa-3x"></i></a>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            
+  {{ form_label(form.id_matiere3, 'Matiere') }}
+    {{ form_widget(form.id_matiere3) }}
+    
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                           
+    {{ form_label(form.id_professeur3,'Professeur', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.id_professeur3) }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </fieldset>
 
                                             <!-- Step 2 -->
-                                            <h6><i class="step-icon feather icon-briefcase"></i> Step 2</h6>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="proposalTitle11">Proposal Title</label>
-                                                            <input type="text" class="form-control" id="proposalTitle11">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="jobtitle11">Job Title</label>
-                                                            <input type="text" class="form-control" id="jobtitle11">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="shortDescription11">Short Description :</label>
-                                                            <textarea name="shortDescription" id="shortDescription11" rows="5" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
+                                            
 
                                             <!-- Step 3 -->
-                                            <h6><i class="step-icon feather icon-image"></i> Step 3</h6>
+                                            <h6><i class="step-icon feather icon-image"></i> Imprimer</h6>
                                             <fieldset>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -239,14 +290,13 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                        </form>
+{{ form_end(form) }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <!-- Form wizard with icon tabs section end -->                
 
 
 <a href="{{ path('eleve_index') }}">back to list</a>
@@ -254,15 +304,79 @@
     
     </div>
 
-    <a href="{{ path('seance_index') }}">back to list</a>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('app-assets/vendors/js/extensions/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
 <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
-<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/forms/wizard-steps.js') }}"></script>
+<script>
+    var $sport;
+    $sport = $('#eleve_id_matiere');
+    
+    $('#add1').hide();
+     $('#add2').hide();
+     $( "#btn1" ).click(function() {
+   $('#add1').show();
+   $('#btn1').hide();
+});
+$( "#btn2" ).click(function() {
+   $('#add2').show();
+   $('#btn2').hide();
+});
+    $sport.change(function() {
+        $('#eleve_id_professeur').show();
+        
+        var $form = $(this).closest('form');
+        var data = {id_matiere : $sport.val()};
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'GET',
+            data : data,
+            success: function(html) {
+                $('#eleve_id_professeur').replaceWith(
+                    $(html).find('#eleve_id_professeur')
+                );
+                  var $sport1;
+                    $sport1 = $('#eleve_id_matiere2');
+                    $sport1.change(function() {
+                    
+                    var $form = $(this).closest('form');
+                    var data = {id_matiere2 : $sport1.val()};
+                    $.ajax({
+                        url : $form.attr('action'),
+                        type: 'GET',
+                        data : data,
+                        success: function(html) {
+                            $('#eleve_id_professeur2').replaceWith(
+                                $(html).find('#eleve_id_professeur2')
+                            );
+                            var $sport2;
+                                $sport2 = $('#eleve_id_matiere3');
+                                $sport2.change(function() {
+                                
+                                var $form = $(this).closest('form');
+                                var data = {id_matiere3 : $sport2.val()};
+                                $.ajax({
+                                    url : $form.attr('action'),
+                                    type: 'GET',
+                                    data : data,
+                                    success: function(html) {
+                                        $('#eleve_id_professeur3').replaceWith(
+                                            $(html).find('#eleve_id_professeur3')
+                                        );
+                                    }
+                                });
+                            });
+                        }
+                    });
+                });
+            }
+        });
+    });
+    </script>
 {% endblock %}

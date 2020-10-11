@@ -8,6 +8,7 @@ use App\Entity\Notification;
 use App\Form\ProfesseurSearchType;
 use App\Form\ProfesseurType;
 use App\Repository\ProfesseurRepository;
+use App\Repository\MatiereRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,24 +54,40 @@ class ProfesseurController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,MatiereRepository $professeurRepository): Response
     {
         $idMatier = $request->query->get('id_matiere', null);
         if ($request->isMethod('POST')) {
             $idMatier = $request->request->get('id_matiere', null);
-            if($idMatier!=NULL){
-                dd($idMatier);
-            }
         }
         $professeur = new Professeur();
         $form = $this->createForm(ProfesseurType::class, $professeur, [
             'id_matiere' => $idMatier
         ]);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($professeur);
-            $entityManager->flush();
+            
+            $tableauprofesseur=[];
+            if($form['id_professeur']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur']->getData()); 
+            }
+            if($form['id_professeur2']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur2']->getData()) ;
+            }
+            if($form['id_professeur3']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur3']->getData()) ;
+            }
+            $k=count($tableauprofesseur);
+            for($i=0;$i<$k;$i++){
+                $group = new Professeur();
+                $group->setNom($form['nom']->getData());
+                $group->setPrenom($form['prenom']->getData());
+                $group->setTel($form['tel']->getData());
+                $group->setIdUser($form['id_user']->getData());
+                $group->setIdMatiere($tableauprofesseur[$i]);
+                $entityManager->persist($group);
+            }
+            $entityManager->flush(); 
             $notification = new Notification();
             $entityManager1 = $this->getDoctrine()->getManager();
             $notification->setDate(new \DateTime('now'));

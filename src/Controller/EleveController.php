@@ -34,9 +34,25 @@ class EleveController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $idMatier = $request->query->get('id_matiere', null);
+        if ($request->isMethod('POST')) {
+            $idMatier = $request->request->get('id_matiere', null);
+        }
+        $idMatier2 = $request->query->get('id_matiere2', null);
+        if ($request->isMethod('POST')) {
+            $idMatier2 = $request->request->get('id_matiere2', null);
+        }
+        $idMatier3 = $request->query->get('id_matiere3', null);
+        if ($request->isMethod('POST')) {
+            $idMatier3 = $request->request->get('id_matiere3', null);
+        }
         $eleve = new Eleve();
         $eleve->setDtInscription(new \DateTime('now'));
-        $form = $this->createForm(EleveType::class, $eleve);
+        $form = $this->createForm(EleveType::class, $eleve, [
+            'id_matiere' => $idMatier,
+            'id_matiere2' => $idMatier2,
+            'id_matiere3'=>$idMatier3
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

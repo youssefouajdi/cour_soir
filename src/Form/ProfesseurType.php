@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Matiere;
+use App\Entity\Niveau;
 use App\Entity\Professeur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -22,21 +23,22 @@ class ProfesseurType extends AbstractType
             ->add('id_user')
             ->add('prenom')
             ->add('tel')
-            ->add('idMatiere',ChoiceType::class, [
-                'placeholder'=>"",
-                'choices' => [
-                        'Math' => 'Math',
-                        'Physique' => 'Physique',
-                        'SVT' => 'SVT',
-                        'Francais'=>'Francais'
-                ]]);
+            ->add('idMatiere',EntityType::class, [
+                'class'=>Matiere::class,
+                'label'=>'Niveau',
+                'required'=>true,
+                'placeholder'=>'',
+                'mapped'=>false,
+                'choice_label'=>function($matiere){
+                    return $matiere->getNomMatiere();
+                }
+            ]);
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function (FormEvent $event) use($options) {
                     $idMatiere  = (int)$options['id_matiere'];
                     $form=$event->getForm();
                     if($idMatiere !=null){
-                        dd($idMatiere);
                         $form->add('id_professeur',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
@@ -56,7 +58,10 @@ class ProfesseurType extends AbstractType
                             'class'=>'App\Entity\Matiere',
                             'placeholder'=>"",
                             'label'=>'niveau',
-                            'required'=>false
+                            'required'=>false,
+                            'choice_label'=>function($matiere){
+                                return $matiere->getNiveau();
+                            }
                         ]);
                     }
                 }
