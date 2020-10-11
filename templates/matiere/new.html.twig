@@ -13,7 +13,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Créer une Séance :</h2>
+                            <h2 class="content-header-title float-left mb-0">Créer une Matiere :</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a>
@@ -52,10 +52,23 @@
                                                 <fieldset class="form-group">
 
 
-   {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+   
+{{ form_start(form) }}
+{{ form_label(form.nomMatiere, 'Nom matiere', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.nomMatiere) }}
+    {{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.prix) }}
+    <div id="test2">
+    {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.niveau) }}
+    </div>
+    <a id="btn1">Nouvelle matiere</i></a><br>
+     <div id="test1">
+    {{ form_label(form.autre_niveau,'Niveau', {'label_attr': {'class': 'col-sm-6 '}}) }}
+    {{ form_widget(form.autre_niveau) }}
+    </div>
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
 
     
  </fieldset>
@@ -106,7 +119,19 @@
     <a href="{{ path('seance_index') }}">back to list</a>
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
+{{ parent() }}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$('#test1').hide();
+     $( "#btn1" ).click(function() {
+         
+         $('#test1').show();
+   $('#btn1').hide();
+   $('#test2').hide();
+});
+</script>
+
 <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
 <script src="{{ asset('app-assets/js/core/app.js') }}"></script>

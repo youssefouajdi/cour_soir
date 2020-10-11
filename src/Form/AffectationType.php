@@ -26,6 +26,7 @@ class AffectationType extends AbstractType
     {
 
         $builder
+        
             ->add('jour')
             ->add('paye' )
             ->add('reste')

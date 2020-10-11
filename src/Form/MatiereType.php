@@ -6,6 +6,8 @@ use App\Entity\Matiere;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MatiereType extends AbstractType
@@ -15,6 +17,8 @@ class MatiereType extends AbstractType
         $builder
             ->add('nomMatiere')
             ->add('niveau',ChoiceType::class, [
+                'placeholder'=>"",
+                'mapped'=>false,
                 'choices' => [
                     'eleve' => [
                         '1 AC' => '1 AC',
@@ -36,6 +40,10 @@ class MatiereType extends AbstractType
 
                     ]
                 ]])
+            ->add('autre_niveau', null, [
+                'required'   => false,
+                'mapped'=>false
+            ])
             ->add('prix')
         ;
     }

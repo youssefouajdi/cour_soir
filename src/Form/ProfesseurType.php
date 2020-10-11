@@ -36,6 +36,7 @@ class ProfesseurType extends AbstractType
                     $idMatiere  = (int)$options['id_matiere'];
                     $form=$event->getForm();
                     if($idMatiere !=null){
+                        dd($idMatiere);
                         $form->add('id_professeur',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
@@ -53,7 +54,7 @@ class ProfesseurType extends AbstractType
                         $form->add('id_professeur',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"test",
+                            'placeholder'=>"",
                             'label'=>'niveau',
                             'required'=>false
                         ]);
@@ -83,7 +84,7 @@ class ProfesseurType extends AbstractType
                         $form->add('id_professeur2',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"test",
+                            'placeholder'=>"",
                             'label'=>'niveau',
                             'required'=>false
                         ]);

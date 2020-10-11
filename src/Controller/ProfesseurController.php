@@ -58,6 +58,9 @@ class ProfesseurController extends AbstractController
         $idMatier = $request->query->get('id_matiere', null);
         if ($request->isMethod('POST')) {
             $idMatier = $request->request->get('id_matiere', null);
+            if($idMatier!=NULL){
+                dd($idMatier);
+            }
         }
         $professeur = new Professeur();
         $form = $this->createForm(ProfesseurType::class, $professeur, [

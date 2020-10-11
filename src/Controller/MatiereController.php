@@ -44,6 +44,9 @@ class MatiereController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            if($form['niveau']->getData() === NULL){
+                $matiere->setNiveau($form['autre_niveau']->getData());
+            }
             $entityManager->persist($matiere);
             $entityManager->flush();
             $notification = new Notification();
