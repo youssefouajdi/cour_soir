@@ -24,20 +24,20 @@ class ProfesseurType extends AbstractType
             ->add('id_user')
             ->add('prenom')
             ->add('tel')
-            ->add('idMatiere',EntityType::class, [
-                'class'=>Matiere::class,
-                'label'=>'Niveau',
-                'required'=>true,
-                'placeholder'=>'',
+            ->add('idMatiere',ChoiceType::class,[
                 'mapped'=>false,
-                'choice_label'=>function($matiere){
-                    return $matiere->getNiveau().' '.$matiere->getNomMatiere();
-                }
-            ]);
+                'placeholder'=>"",
+                'choices' => [
+                    'Math' => 'Math',
+                        'Physique' => 'Physique',
+                        'SVT' => 'SVT',
+                        'Français' => 'Français',
+                        'Anglais'=>'Anglais'
+                ]]);
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function (FormEvent $event) use($options) {
-                    $idMatiere  = (int)$options['id_matiere'];
+                    $idMatiere  = $options['id_matiere'];
                     $form=$event->getForm();
                     if($idMatiere !=null){
                         $form->add('id_professeur',EntityType::class,[
@@ -47,20 +47,17 @@ class ProfesseurType extends AbstractType
                             'label'=>'niveau',
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
+                                
                             return $er->createQueryBuilder('p')
-                            ->where('p.idMatiere = :val')
+                            ->where('p.nomMatiere LIKE :val')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur',EntityType::class,[
+                        $form->add('id_professeur',ChoiceType::class,[
                             'mapped'=>false,
-                            'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"",
-                            'label'=>'niveau',
-                            'required'=>false,
-                            'choice_label'=>'niveau'
+                            'placeholder'=>false
                         ]);
                     }
                 }
@@ -68,7 +65,7 @@ class ProfesseurType extends AbstractType
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function (FormEvent $event) use($options) {
-                    $idMatiere  = (int)$options['id_matiere'];
+                    $idMatiere  = $options['id_matiere'];
                     $form=$event->getForm();
                     if($idMatiere !=null){
                         $form->add('id_professeur2',EntityType::class,[
@@ -79,19 +76,16 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                            ->where('p.idMatiere = :val')
+                            ->where('p.nomMatiere LIKE :val')
+                            ->groupBy('p.niveau')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur2',EntityType::class,[
+                        $form->add('id_professeur2',ChoiceType::class,[
                             'mapped'=>false,
-                            'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"",
-                            'label'=>'niveau',
-                            'required'=>false,
-                            'choice_label'=>'niveau'
+                            'placeholder'=>false
                         ]);
                     }
                 }
@@ -99,7 +93,7 @@ class ProfesseurType extends AbstractType
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function (FormEvent $event) use($options) {
-                    $idMatiere  = (int)$options['id_matiere'];
+                    $idMatiere  = $options['id_matiere'];
                     $form=$event->getForm();
                     if($idMatiere !=null){
                         $form->add('id_professeur3',EntityType::class,[
@@ -110,19 +104,15 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                            ->where('p.idMatiere = :val')
+                            ->where('p.nomMatiere LIKE  :val')
                                 ->setParameter('val', $idMatiere);
                             },
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur3',EntityType::class,[
+                        $form->add('id_professeur3',ChoiceType::class,[
                             'mapped'=>false,
-                            'class'=>'App\Entity\Matiere',
-                            'placeholder'=>"",
-                            'label'=>'niveau',
-                            'required'=>false,
-                            'choice_label'=>'niveau'
+                            'placeholder'=>false
                         ]);
                     }
                 }

@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 {{ form_label(form.id_user, 'User', {'label_attr': {'class': 'col-sm-6 '}}) }}
     {{ form_widget(form.id_user) }}
 {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'col-sm-6 '}}) }}
