@@ -36,13 +36,11 @@ class MatiereRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByExampleField($value1,$value2): ?Matiere
+    public function findByExampleField($value1): ?Matiere
     {
         return $this->createQueryBuilder('a')
              ->andWhere('a.nomMatiere LIKE :val')
-            ->andWhere('a.niveau = :val2')
             ->setParameter('val', $value1)
-            ->setParameter('val2', $value2)
             ->getQuery()
             ->getOneOrNullResult()
         ;

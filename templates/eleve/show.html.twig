@@ -4,59 +4,106 @@
 
 {% block body %}
     {{ parent() }}
-    <h4 style="margin-top:100px;"></h4>
-    <h1>Eleve</h1>
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+  <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- page users view start -->
+                <section class="page-users-view">
+                    <div class="row">
+                        <!-- account start -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Information eleve</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+                                            <table>
+                                                <tbody><tr>
+                                                    <td class="font-weight-bold">Id Eleve</td>
+                                                    <td>{{ eleve.idEleve }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Nom</td>
+                                                    <td>{{ eleve.nom }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Prenom</td>
+                                                    <td>{{ eleve.prenom }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Tel</td>
+                                                    <td>{{ eleve.tel }}</td>
+                                                </tr>
+                                            </tbody></table>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-5">
+                                            <table class="ml-0 ml-sm-0 ml-lg-0">
+                                                <tbody><tr>
+                                                    <td class="font-weight-bold">Transport</td>
+                                                    <td>{{ eleve.transport ? 'Yes' : 'No' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Date Inscription</td>
+                                                    <td>{{ eleve.dtInscription ? eleve.dtInscription|date('Y-m-d') : '' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Email</td>
+                                                    <td>{{ eleve.email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Type</td>
+                                                    <td>{{ eleve.type }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Niveau</td>
+                                                    <td>{{ eleve.niveau }}</td>
+                                                </tr>
+                                            </tbody></table>
+                                        </div>
+                                        <div class="col-12">
+                                            
+                                            {{ include('eleve/_delete_form.html.twig') }}
+                                        </div><div class="col-12">
+<a href="{{ path('eleve_index') }}">back to list</a><br>
+ <a href="{{ path('affectation_new',{'ideleve': eleve}) }}">affecter {{ eleve.nom }} {{ eleve.prenom }}  a une matiere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdEleve</th>
-                <td>{{ eleve.idEleve }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ eleve.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ eleve.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Transport</th>
-                <td>{{ eleve.transport ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>DtInscription</th>
-                <td>{{ eleve.dtInscription ? eleve.dtInscription|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ eleve.email }}</td>
-            </tr>
-            <tr>
-                <th>Tel</th>
-                <td>{{ eleve.tel }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ eleve.type }}</td>
-            </tr>
-            <tr>
-                <th>Niveau</th>
-                <td>{{ eleve.niveau }}</td>
-            </tr>
-        </tbody>
-    </table>
+</div>
 
-    <a href="{{ path('eleve_index') }}">back to list</a><br>
+    
 
-    <a href="{{ path('eleve_edit', {'idEleve': eleve.idEleve}) }}">edit</a><br>
-    <a href="{{ path('affectation_new',{'ideleve': eleve}) }}">affecter {{ eleve.nom }} {{ eleve.prenom }}  a une matiere</a>
-    {{ include('eleve/_delete_form.html.twig') }}
+   
+    
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
-    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
-    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
-    <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+{{ parent() }}
+<script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+<script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/datatables/datatable.js') }}"></script>
 {% endblock %}

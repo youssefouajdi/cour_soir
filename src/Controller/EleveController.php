@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Eleve;
+use App\Entity\Affectation;
+use DateTime;
 use App\Form\EleveType;
 use App\Entity\Notification;
 use App\Repository\EleveRepository;
@@ -70,8 +72,48 @@ class EleveController extends AbstractController
                 $eleve->setType("etudiant");
             }
             $entityManager = $this->getDoctrine()->getManager();
+            $eleve->setNom($form['nom']->getData());
+            $eleve->setPrenom($form['prenom']->getData());
+            $eleve->setDtInscription(new \DateTime('now'));
+            $eleve->setTransport($form['transport']->getData());
+            $eleve->setEmail($form['email']->getData());
+            $eleve->setTel($form['tel']->getData());
+            $eleve->setNiveau($form['niveau']->getData());
             $entityManager->persist($eleve);
             $entityManager->flush();
+            $entityManager2 = $this->getDoctrine()->getManager();
+            $tableaumatiere=[];
+            if($form['id_matiere']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere']->getData()); 
+            }
+            if($form['id_matiere2']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere2']->getData()) ;
+            }
+            if($form['id_matiere3']->getData()!=null){
+                array_push($tableaumatiere,$form['id_matiere3']->getData()) ;
+            }
+            $tableauprofesseur=[];
+            if($form['id_professeur']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur']->getData()); 
+            }
+            if($form['id_professeur2']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur2']->getData()) ;
+            }
+            if($form['id_professeur3']->getData()!=null){
+                array_push($tableauprofesseur,$form['id_professeur3']->getData()) ;
+            }
+            $k=count($tableaumatiere);
+            for($i=0;$i<$k;$i++){
+                $group = new Affectation();
+               // $group->setIdProfesseur($tableauprofesseur[$i]);
+                $group->setIdMatiere($tableaumatiere[$i]);
+                $group->setPaye($form['paye']->getData());
+                $group->setIdEleve($eleve);
+                $group->setReste($form['reste']->getData());
+                $group->setJour(new \DateTime('now'));
+                $entityManager2->persist($group);
+            }
+            $entityManager2->flush();
             $notification = new Notification();
             $entityManager1 = $this->getDoctrine()->getManager();
             $notification->setDate(new \DateTime('now'));

@@ -82,7 +82,7 @@ class EleveType extends AbstractType
                             ->where('p.idMatiere = :val')
                             ->setParameter('val', $idMatiere);
                         },
-                        'choice_label' =>'prenom'
+                        'choice_label' =>'nom'
                     ]);
                 }else{
                     $form->add('id_professeur',EntityType::class,[
@@ -110,7 +110,7 @@ class EleveType extends AbstractType
                             ->where('p.idMatiere = :val')
                             ->setParameter('val', $idMatiere2);
                         },
-                        'choice_label' =>'prenom'
+                        'choice_label' =>'nom'
                     ]);
                 }else{
                     $form->add('id_professeur2',EntityType::class,[
@@ -138,7 +138,7 @@ class EleveType extends AbstractType
                             ->where('p.idMatiere = :val')
                             ->setParameter('val', $idMatiere3);
                         },
-                        'choice_label' =>'prenom'
+                        'choice_label' =>'nom'
                     ]);
                 }else{
                     $form->add('id_professeur3',EntityType::class,[

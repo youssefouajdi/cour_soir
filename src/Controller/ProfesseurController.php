@@ -133,6 +133,7 @@ class ProfesseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $entityManager1 = $this->getDoctrine()->getManager();
+            $notification = new Notification();
             $notification->setDate(new \DateTime('now'));
             $notification->setSujet("modificationd un professeur");
             $notification->setLu(FALSE);
@@ -162,6 +163,7 @@ class ProfesseurController extends AbstractController
             $entityManager->remove($professeur);
             $entityManager->flush();
             $entityManager1 = $this->getDoctrine()->getManager();
+            $notification = new Notification();
             $notification->setDate(new \DateTime('now'));
             $notification->setSujet("suppression d un professeur");
             $notification->setLu(FALSE);

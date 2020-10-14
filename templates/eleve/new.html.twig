@@ -234,62 +234,54 @@
                                             <!-- Step 3 -->
                                             <h6><i class="step-icon feather icon-image"></i> Imprimer</h6>
                                             <fieldset>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="eventName11">Event Name :</label>
-                                                            <input type="text" class="form-control" id="eventName11">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="eventType11">Event Status :</label>
-                                                            <select class="custom-select form-control" id="eventType11" data-placeholder="Type to search cities" name="eventType11">
-                                                                <option value="Banquet">Planning</option>
-                                                                <option value="Fund Raiser">In Process</option>
-                                                                <option value="Dinner Party">Finished</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="eventLocation11">Event Location :</label>
-                                                            <select class="custom-select form-control" id="eventLocation11" name="location">
-                                                                <option value="new-york">New York</option>
-                                                                <option value="chicago">Chicago</option>
-                                                                <option value="san-francisco">San Francisco</option>
-                                                                <option value="boston">Boston</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group d-flex align-items-center pt-md-2">
-                                                            <label class="mr-2">Requirements :</label>
-                                                            <div class="c-inputs-stacked">
-                                                                <div class="d-inline-block mr-2">
-                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                        <input type="checkbox" value="false">
-                                                                        <span class="vs-checkbox">
-                                                                            <span class="vs-checkbox--check">
-                                                                                <i class="vs-icon feather icon-check"></i>
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="">Staffing</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-inline-block">
-                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                        <input type="checkbox" value="false">
-                                                                        <span class="vs-checkbox">
-                                                                            <span class="vs-checkbox--check">
-                                                                                <i class="vs-icon feather icon-check"></i>
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="">Catering</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                               <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="font-weight-bold">Date/heure</td>
+                                                    <td>{{ "now"|date("d/m/Y") }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Nom</td>
+                                                    <td id="valeur1"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Prenom</td>
+                                                    <td id="valeur2"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Tel</td>
+                                                    <td id="valeur3"></td>
+                                                </tr>
+                                            </tbody></table>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-5">
+                                            <table class="ml-0 ml-sm-0 ml-lg-0">
+                                                <tbody><tr>
+                                                    <td class="font-weight-bold">Transport</td>
+                                                    <td id="valeur4"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Email</td>
+                                                    <td id="valeur5"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Niveau</td>
+                                                    <td id="valeur6"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Code barre</td>
+                                                    <canvas id="barcode"></canvas>
+                                                </tr>
+                                            </tbody></table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                                             </fieldset>
+                                            <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
                                     </div>
                                 </div>
@@ -314,10 +306,30 @@
 <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/forms/wizard-steps.js') }}"></script>
-<script>
+<script src="{{ asset('app-assets/JsBarcode.all.min.js') }}"></script><script>
     var $sport;
     $sport = $('#eleve_id_matiere');
     
+    $("#eleve_nom").change(function(){
+         $("#valeur1").html($("#eleve_nom").val());
+         $("#barcode").JsBarcode($("#eleve_nom").val());
+});
+ $("#eleve_prenom").change(function(){
+         $("#valeur2").html($("#eleve_prenom").val());
+});
+    $("#eleve_tel").change(function(){
+         $("#valeur3").html($("#eleve_tel").val());
+});
+$("#eleve_email").change(function(){
+         $("#valeur5").html($("#eleve_email").val());
+});
+    $("#eleve_niveau").change(function(){
+         $("#valeur6").html($("#eleve_niveau").val());
+});
+$("#eleve_nom").change(function(){
+         $("#valeur7").html($("#eleve_nom").val());
+});
+
     $('#add1').hide();
      $('#add2').hide();
      $( "#btn1" ).click(function() {

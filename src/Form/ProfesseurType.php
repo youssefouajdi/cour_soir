@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Matiere;
 use App\Entity\Niveau;
+use Doctrine\ORM\EntityRepository;
 use App\Entity\Professeur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -30,7 +31,7 @@ class ProfesseurType extends AbstractType
                 'placeholder'=>'',
                 'mapped'=>false,
                 'choice_label'=>function($matiere){
-                    return $matiere->getNomMatiere();
+                    return $matiere->getNiveau().' '.$matiere->getNomMatiere();
                 }
             ]);
             $builder->addEventListener(
@@ -47,10 +48,10 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.nomMatiere = :val')
+                            ->where('p.idMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
-                            'choice_label' =>'niveau'
+                            'choice_label'=>'niveau'
                         ]);
                     }else{
                         $form->add('id_professeur',EntityType::class,[
@@ -59,9 +60,7 @@ class ProfesseurType extends AbstractType
                             'placeholder'=>"",
                             'label'=>'niveau',
                             'required'=>false,
-                            'choice_label'=>function($matiere){
-                                return $matiere->getNiveau();
-                            }
+                            'choice_label'=>'niveau'
                         ]);
                     }
                 }
@@ -80,10 +79,10 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.nomMatiere = :val')
+                            ->where('p.idMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
-                            'choice_label' =>'niveau'
+                            'choice_label'=>'niveau'
                         ]);
                     }else{
                         $form->add('id_professeur2',EntityType::class,[
@@ -91,7 +90,8 @@ class ProfesseurType extends AbstractType
                             'class'=>'App\Entity\Matiere',
                             'placeholder'=>"",
                             'label'=>'niveau',
-                            'required'=>false
+                            'required'=>false,
+                            'choice_label'=>'niveau'
                         ]);
                     }
                 }
@@ -110,22 +110,24 @@ class ProfesseurType extends AbstractType
                             'required'=>false,
                             'query_builder'=>function (EntityRepository $er) use ($form, $idMatiere) {
                             return $er->createQueryBuilder('p')
-                                ->where('p.nomMatiere = :val')
+                            ->where('p.idMatiere = :val')
                                 ->setParameter('val', $idMatiere);
                             },
-                            'choice_label' =>'niveau'
+                            'choice_label'=>'niveau'
                         ]);
                     }else{
                         $form->add('id_professeur3',EntityType::class,[
                             'mapped'=>false,
                             'class'=>'App\Entity\Matiere',
-                            'label'=>'niveau',
                             'placeholder'=>"",
-                            'required'=>false
+                            'label'=>'niveau',
+                            'required'=>false,
+                            'choice_label'=>'niveau'
                         ]);
                     }
                 }
             );
+           
     }
 
     public function configureOptions(OptionsResolver $resolver)
