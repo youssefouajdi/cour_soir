@@ -34,15 +34,18 @@ class MatiereRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    */ 
+/*
+      * @return Matiere[] Returns an array of Matiere objects
+     */
 
-    public function findByExampleField($value1): ?Matiere
+    public function findOneBySomeField($value2)
     {
-        return $this->createQueryBuilder('a')
-             ->andWhere('a.nomMatiere LIKE :val')
-            ->setParameter('val', $value1)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query= $this->createQueryBuilder('m')
+        ->andWhere('m.idMatiere = :val2')
+        ->setParameter('val2', $value2)
+        ->getQuery()
+        ->getResult();
+        return $query;
     }
 }

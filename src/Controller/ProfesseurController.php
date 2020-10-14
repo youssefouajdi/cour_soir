@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Professeur;
+use App\Entity\Matiere;
 use App\Entity\ProfesseurSearch;
 use App\Entity\Notification;
 use App\Form\ProfesseurSearchType;
@@ -66,7 +67,7 @@ class ProfesseurController extends AbstractController
         ]);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            
+
             $tableauprofesseur=[];
             if($form['id_professeur']->getData()!=null){
                 array_push($tableauprofesseur,$form['id_professeur']->getData()); 
@@ -84,7 +85,10 @@ class ProfesseurController extends AbstractController
                 $group->setPrenom($form['prenom']->getData());
                 $group->setTel($form['tel']->getData());
                 $group->setIdUser($form['id_user']->getData());
-                $group->setIdMatiere($tableauprofesseur[$i]);
+                $group->setIdMatiere(
+                    $this->getDoctrine()
+                    ->getRepository(Matiere::class)
+                    ->findOneBySomeField($tableauprofesseur[$i])[0]);
                 $entityManager->persist($group);
             }
             $entityManager->flush(); 

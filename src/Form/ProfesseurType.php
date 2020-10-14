@@ -55,9 +55,8 @@ class ProfesseurType extends AbstractType
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur',ChoiceType::class,[
-                            'mapped'=>false,
-                            'placeholder'=>false
+                        $form->add('id_professeur',null,[
+                            'mapped'=>false
                         ]);
                     }
                 }
@@ -83,9 +82,8 @@ class ProfesseurType extends AbstractType
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur2',ChoiceType::class,[
-                            'mapped'=>false,
-                            'placeholder'=>false
+                        $form->add('id_professeur2',null,[
+                            'mapped'=>false
                         ]);
                     }
                 }
@@ -110,9 +108,8 @@ class ProfesseurType extends AbstractType
                             'choice_label'=>'niveau'
                         ]);
                     }else{
-                        $form->add('id_professeur3',ChoiceType::class,[
-                            'mapped'=>false,
-                            'placeholder'=>false
+                        $form->add('id_professeur3',null,[
+                            'mapped'=>false
                         ]);
                     }
                 }
