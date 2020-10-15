@@ -35,9 +35,9 @@
                   <div class="card-content">
                      <div class="card-body card-dashboard">
                         <button id="addRow" class="btn btn-primary mb-2 waves-effect waves-light"><i class="feather icon-plus"></i>&nbsp;<a href="{{ path('eleve_new') }}">Create new</a></button>
-                        
+                        <button onclick="exportTableToExcel('tblData', 'Eleve')" class="btn btn-primary mb-2 waves-effect waves-light">Exporter en un fichier excel </button>
                         <div class="table-responsive">
-                           <table class="table zero-configuration">
+                           <table class="table zero-configuration" id="tblData">
                               <thead>
                                  <tr>
                                     <th>IdEleve</th>
@@ -103,6 +103,38 @@
 {% endblock %}
 {% block javascripts %}
 {{ parent() }}
+<script>
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+</script>
 <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('/app-assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
 <script src="{{ asset('/app-assets/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>

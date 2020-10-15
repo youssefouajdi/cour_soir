@@ -41,6 +41,28 @@
                                                     <td>{{ eleve.tel }}</td>
                                                 </tr>
                                             </tbody></table>
+                                            <hr>
+                                            <table>
+                                                <tbody>
+                                                {% for affectation in affectations %}
+                                                <tr>
+                                                    <td class="font-weight-bold">Jour</td>
+                                                    <td>{{ affectation.jour|date('Y-m-d') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Niveau / Matiere</td>
+                                                    <td>{{ affectation.idMatiere }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold"> paye</td>
+                                                    <td>{{ affectation.paye }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">reste</td>
+                                                    <td>{{ affectation.reste }}</td>
+                                                </tr>
+                                                 {% endfor %}
+                                            </tbody></table>
                                         </div>
                                         <div class="col-12 col-md-12 col-lg-5">
                                             <table class="ml-0 ml-sm-0 ml-lg-0">
@@ -69,7 +91,10 @@
                                         <div class="col-12">
                                             
                                             {{ include('eleve/_delete_form.html.twig') }}
-                                        </div><div class="col-12">
+                                        </div>
+                                    </div>
+                                </div>
+                                        <div class="col-12">
 <a href="{{ path('eleve_index') }}">back to list</a><br>
  <a href="{{ path('affectation_new',{'ideleve': eleve}) }}">affecter {{ eleve.nom }} {{ eleve.prenom }}  a une matiere</a>
                                         </div>

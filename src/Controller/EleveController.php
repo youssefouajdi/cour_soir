@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Eleve;
+use App\Repository\AffectationRepository;
 use App\Entity\Affectation;
 use DateTime;
 use App\Form\EleveType;
@@ -137,10 +137,17 @@ class EleveController extends AbstractController
      */
     public function show(Eleve $eleve): Response
     {
+       
+        $affectation=$this->getDoctrine()
+        ->getRepository(Affectation::class)
+        ->findByExampleField($eleve);
         return $this->render('eleve/show.html.twig', [
             'eleve' => $eleve,
+            'affectations'=>$affectation,
         ]);
     }
+
+   
 
     /**
      * @IsGranted("ROLE_ADMIN")

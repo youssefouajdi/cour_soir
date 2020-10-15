@@ -89,17 +89,16 @@ $sport.change(function(){
                 $('#paiement_PrixMatiere').replaceWith(
                     $(html).find('#paiement_PrixMatiere')
                 );
-                console.log($PrixMatiere.val());
                  },
         })
      } catch (error) {
         console.error(error);
     }
     finally {
-        $Prixpaye.change(function(){
+        $PrixMatiere.change(function(){
             $("#paiement_montantTotal").val(parseInt($PrixMatiere.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere2.val()));
             //$("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
-                $("#paiement_motantRest").val(parseInt($val.val())-parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())+50);
+                $("#paiement_motantRest").val(/*parseInt($val.val())*/-parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())+50);
         })
     }
            

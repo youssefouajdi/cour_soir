@@ -102,7 +102,6 @@ class ProfesseurController extends AbstractController
             $entityManager1->flush();
             return $this->redirectToRoute('professeur_index');
         }
-
         return $this->render('professeur/new.html.twig', [
             'professeur' => $professeur,
             'form' => $form->createView(),
@@ -133,7 +132,6 @@ class ProfesseurController extends AbstractController
     {
         $form = $this->createForm(ProfesseurType::class, $professeur);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $entityManager1 = $this->getDoctrine()->getManager();
@@ -175,7 +173,6 @@ class ProfesseurController extends AbstractController
             $entityManager1->persist($notification);
             $entityManager1->flush();
         }
-
         return $this->redirectToRoute('professeur_index');
     }
 }
