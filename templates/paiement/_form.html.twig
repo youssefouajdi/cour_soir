@@ -78,6 +78,13 @@ $Prixpaye1.val(0);
 $Prixpaye2.val(0);
 $("input:disabled").val(0);
  var $form = $(this).closest('form');
+  function onPrixChange(){
+    console.info("finally");
+            console.log(parseInt($PrixMatiere.val()))
+            $("#paiement_montantTotal").val(parseInt($PrixMatiere.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere2.val()));
+            //$("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
+                $("#paiement_motantRest").val(parseInt($val.val())-parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())+50);
+    }
 $sport.change(function(){
      var data = {id_matiere : $sport.val()};
       try {
@@ -86,21 +93,21 @@ $sport.change(function(){
             type: 'GET',
             data : data,
             success: function(html) {
-                $('#paiement_PrixMatiere').replaceWith(
-                    $(html).find('#paiement_PrixMatiere')
-                );
+
+
+                var prix =   $(html).find('#paiement_PrixMatiere')[0].outerText;
+                $('#paiement_PrixMatiere').val(prix);
+
+                      onPrixChange();  
+                      console.info("success");
+
                  },
         })
+         console.info("try");
      } catch (error) {
         console.error(error);
     }
-    finally {
-        $PrixMatiere.change(function(){
-            $("#paiement_montantTotal").val(parseInt($PrixMatiere.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere2.val()));
-            //$("#paiement_montantTotal").val(parseInt($Prixpaye.val())+parseInt($Prixpaye1.val())+parseInt($Prixpaye2.val()));
-                $("#paiement_motantRest").val(/*parseInt($val.val())*/-parseInt($PrixMatiere2.val())+parseInt($PrixMatiere1.val())+parseInt($PrixMatiere.val())+50);
-        })
-    }
+   
            
   });
 $sport1.change(function(){
