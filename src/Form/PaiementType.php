@@ -68,6 +68,7 @@ class PaiementType extends AbstractType
                 'class'=>Matiere::class,
                 'label'=>'Matiere',
                 'placeholder'=>'',
+                'required'=>false,
                 'mapped'=>false,
                 'choice_label'=>function($matiere){
                     return $matiere->getNiveau().' '.$matiere->getNomMatiere();
@@ -76,12 +77,14 @@ class PaiementType extends AbstractType
            
             ->add('PrixPaye1',NumberType::class, [
                 'label'=>'Prix payer de la matiere',
-                'mapped'=>false
+                'mapped'=>false,
+                'required'=>false
             ])
             ->add('idMatiere2',EntityType::class, [
                 'class'=>Matiere::class,
                 'label'=>'Matiere',
                 'placeholder'=>'',
+                'required'=>false,
                 'mapped'=>false,
                 'choice_label'=>function($matiere){
                     return $matiere->getNiveau().' '.$matiere->getNomMatiere();
@@ -90,7 +93,8 @@ class PaiementType extends AbstractType
          
             ->add('PrixPaye2',NumberType::class, [
                 'label'=>'Prix payer de la matiere',
-                'mapped'=>false
+                'mapped'=>false,
+                 'required'=>false
             ])
             ->add('montantTotal')
             ->add('motantRest')
@@ -104,7 +108,7 @@ class PaiementType extends AbstractType
                     $form->add('PrixMatiere',EntityType::class, [
                         'mapped'=>false,
                         'class'=>'App\Entity\Matiere',
-                        'required'=>true,
+                        'required'=>false,
                         'query_builder'=>function (EntityRepository $er) use ($form,$idMatiere) {
                             return $er->createQueryBuilder('p')
                                 ->where('p.idMatiere = :val')
@@ -114,7 +118,7 @@ class PaiementType extends AbstractType
                     ]);
                 }else{
                     $form->add('PrixMatiere',NumberType::class, [
-                        'required'=>true,
+                        'required'=>false,
                         'label'=>'Prix de la matiere',
                         'data'=>0,
                         'mapped'=>false
@@ -131,7 +135,7 @@ class PaiementType extends AbstractType
                     $form->add('PrixMatiere1',EntityType::class, [
                         'mapped'=>false,
                         'class'=>'App\Entity\Matiere',
-                        'required'=>true,
+                        'required'=>false,
                         'query_builder'=>function (EntityRepository $er) use ($form,$idMatiere2) {
                             return $er->createQueryBuilder('p')
                                 ->where('p.idMatiere = :val')
@@ -141,7 +145,7 @@ class PaiementType extends AbstractType
                     ]);
                 }else{
                     $form->add('PrixMatiere1',NumberType::class, [
-                        'required'=>true,
+                        'required'=>false,
                         'label'=>'Prix de la matiere',
                         'data'=>0,
                         'mapped'=>false
@@ -158,7 +162,7 @@ class PaiementType extends AbstractType
                     $form->add('PrixMatiere2',EntityType::class, [
                         'mapped'=>false,
                         'class'=>'App\Entity\Matiere',
-                        'required'=>true,
+                        'required'=>false,
                         'query_builder'=>function (EntityRepository $er) use ($form,$idMatiere3) {
                             return $er->createQueryBuilder('p')
                                 ->where('p.idMatiere = :val')
@@ -168,7 +172,7 @@ class PaiementType extends AbstractType
                     ]);
                 }else{
                     $form->add('PrixMatiere2',NumberType::class, [
-                        'required'=>true,
+                        'required'=>false,
                         'label'=>'Prix de la matiere',
                         'data'=>0,
                         'mapped'=>false

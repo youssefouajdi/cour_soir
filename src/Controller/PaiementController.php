@@ -55,25 +55,51 @@ class PaiementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $a=[];
-            if($idMatier!=null){
-                array_push($a,$idMatier);
+            if($form['idMatiere']->getData()!=null){
+                array_push($a,$form['idMatiere']->getData());
             }
-            if($idMatier2!=null){
-                array_push($a,$idMatier2);
+            if($form['idMatiere1']->getData()!=null){
+                array_push($a,$form['idMatiere1']->getData());
             }
-            if($idMatier3!=null){
-                array_push($a,$idMatier3);
+            if($form['idMatiere2']->getData()!=null){
+                array_push($a,$form['idMatiere2']->getData());
             }
             $k=count($a);
+            $b=[];
+            
+            if($form['PrixMatiere']->getData()!=null){
+                array_push($b,$form['PrixMatiere']->getData());
+            }
+            if($form['PrixMatiere1']->getData()!=null){
+                array_push($b,$form['PrixMatiere1']->getData());
+            }
+            if($form['PrixMatiere2']->getData()!=null){
+                array_push($b,$form['PrixMatiere2']->getData());
+            }
+            $c=[];
+            
+            if($form['PrixPaye']->getData()!=null){
+                array_push($c,$form['PrixPaye']->getData());
+            }
+            if($form['PrixPaye1']->getData()!=null){
+                array_push($c,$form['PrixPaye1']->getData());
+            }
+            if($form['PrixPaye2']->getData()!=null){
+                array_push($c,$form['PrixPaye2']->getData());
+            }
             $entityManager = $this->getDoctrine()->getManager();
+    
+            for($i=0;$i<$k;$i++){
                 $group = new Paiement();
                 $group->setDtPaiement($form['dtPaiement']->getData());
                 $group->setMode($form['mode']->getData());
                 $group->setIdEleve($form['idEleve']->getData());
-                $group->setMontantTotal($form['montantTotal']->getData());
-                $group->setMotantRest($form['motantRest']->getData());
+                $group->setMontantTotal($b[$i]);
+                $group->setMotantRest($c[$i]);
                 $entityManager->persist($group);
+            }
             $entityManager->flush();
+            
             $notification = new Notification();
             $entityManager1 = $this->getDoctrine()->getManager();
             $notification->setDate(new \DateTime('now'));
